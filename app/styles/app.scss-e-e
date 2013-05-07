@@ -1,0 +1,37 @@
+body, html, .container { width: 100%; height: 100%; }
+div#map { width: 100%; height: 77%; }
+
+div.surround {
+    width: 100%;
+    background-color: white;
+    position: relative;
+    z-index: 1000;
+}
+
+div#header {
+    height: 6%;
+    top: 0;
+    -webkit-box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.4);
+    -moz-box-shadow:    0px 3px 6px rgba(50, 50, 50, 0.4);
+    box-shadow:         0px 3px 6px rgba(50, 50, 50, 0.4);
+}
+
+div#barWrapper {
+    -webkit-box-shadow: 0px -3px 6px rgba(50, 50, 50, 0.4);
+    -moz-box-shadow:    0px -3px 6px rgba(50, 50, 50, 0.4);
+    box-shadow:         0px -3px 6px rgba(50, 50, 50, 0.4);
+    height: 15%;
+    overflow-y: scroll;
+    bottom: 0;
+}
+
+div#bars {
+    padding: 10px;
+}
+
+div.leaflet-popup-content { overflow: auto; }
+div.customPopup { float:right; width:70%;}
+img.img-circle { float:left; margin-top:15px;}
+
+span.placeNames { margin-right: 8px;}
+span.placeNames:hover { background-color: rgba(209, 209, 209, 0.8); }
