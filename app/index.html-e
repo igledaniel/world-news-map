@@ -18,8 +18,8 @@
     <body>
         <div class="container">
             <div class="surround" id="header">
-                <h2 class="title">World News
-                    <small>(as reported by the <em>New York Times</em>)</small></h2>
+                <h2 class="title">World News Map
+                    <small>(<em>about</em>)</small></h2>
                 <div id="dates"></div>
             </div>
 
