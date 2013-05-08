@@ -1,5 +1,13 @@
-body, html, .container { width: 100%; height: 100%; }
+body, html, .container {
+    width: 100%;
+    height: 100%;
+}
+
 div#map { width: 100%; height: 77%; }
+
+h2, h3, h4 {
+    font-family: 'Gentium Basic', serif;
+}
 
 div.surround {
     width: 100%;
@@ -30,8 +38,22 @@ div#bars {
 }
 
 div.leaflet-popup-content { overflow: auto; }
+div.leaflet-popup-content p { margin: 2px 0; }
+
 div.customPopup { float:right; width:70%;}
 img.img-circle { float:left; margin-top:15px;}
 
 span.placeNames { margin-right: 8px;}
 span.placeNames:hover { background-color: rgba(209, 209, 209, 0.8); }
+
+p.date {
+    margin: 0;
+}
+
+h3 {
+    line-height: 26px;
+}
+
+h6 {
+    line-height: 16px;
+}

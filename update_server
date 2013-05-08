@@ -1,0 +1,3 @@
+#!/bin/bash
+scp -r app/python/ theoldbe@theoldbeggar.com:/home/theoldbe/www/worldnewsmap/
+cd dist/ && scp -r * theoldbe@theoldbeggar.com:/home/theoldbe/www/worldnewsmap/

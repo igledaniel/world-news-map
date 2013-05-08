@@ -7,7 +7,9 @@ require.config({
         crossfilter: '../components/crossfilter/crossfilter',
         mustache: '../components/mustache/mustache',
         leafletmarkercluster: 'vendor/leaflet.markercluster',
-        overlappingmarker: 'vendor/oms.min'
+        overlappingmarker: 'vendor/oms.min',
+        font: 'vendor/requirejs-plugins/font',
+        propertyParser: 'vendor/requirejs-plugins/propertyParser'
     },
     shim: {
         bootstrap: {
@@ -35,7 +37,7 @@ require.config({
     }
 });
 
-require(['app', 'jquery', 'leaflet', 'bootstrap'], function (app, $, L) {
+require(['app', 'jquery', 'leaflet', 'bootstrap', 'font!google,families:[Gentium+Basic:700,400italic]'], function (app, $, L) {
     'use strict';
     app;
 });

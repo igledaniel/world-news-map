@@ -1,0 +1,3 @@
+#!/bin/bash
+python get_news.py
+cp nyt_geo_temp.json nyt_geo.json

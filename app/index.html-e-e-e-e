@@ -18,7 +18,7 @@
     <body>
         <div class="container">
             <div class="surround" id="header">
-                <h3>World News Map</h3>
+                <h2>World News Map</h2>
                 <div id="dates"></div>
             </div>
 

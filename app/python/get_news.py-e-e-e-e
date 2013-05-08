@@ -4,7 +4,7 @@ from pprint import pprint
 
 output_master = {}
 
-'''PART 1: FETCH DATA FOR NYT'S 50 MOST RECENT ARTICLES'''
+'''PART 1: FETCH DATA FOR NYT'S 10 MOST RECENT ARTICLES'''
 
 def get_news_data():
     # api key
@@ -72,7 +72,7 @@ geocode_api = 'http://nominatim.openstreetmap.org/search'
 def get_geodata(articles, article, i):
     if i < len(article['geo_facet']):
         place = article['geo_facet'][i]
-        print place
+        # print place
         payload = {
             'q':place,
             'accept-language': 'en',
@@ -85,19 +85,19 @@ def get_geodata(articles, article, i):
         # loop through location list in case initial value(s) not
         # identifiable by Nominatim
         if geocode_json:
-            print 'writing ' + article['title']
+            # print 'writing ' + article['title']
             assign_coordinates(article, geocode_json)
         elif i < 3:
             i += 1
-            print 'no data, trying location #' + str(i + 1)
+            # print 'no data, trying location #' + str(i + 1)
             get_geodata(articles, article, i)
         else:
             # give up after third try
-            print 'no luck, removing this article'
+            # print 'no luck, removing this article'
             articles.remove(article)
     else:
         # give up if nothing in the list matches Nominatim
-        print 'no luck, removing this article'
+        # print 'no luck, removing this article'
         articles.remove(article)
 
 
@@ -114,7 +114,7 @@ def assign_coordinates(article, geodata):
 # do above for each article
 def loop_geodata(articles):
     for article in articles:
-        print article['geo_facet']
+        # print article['geo_facet']
         time.sleep(1.3)
         get_geodata(articles, article, 0)
 

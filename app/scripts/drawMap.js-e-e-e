@@ -1,6 +1,8 @@
 define(['leaflet'], function (L) {
     'use strict';
 
+    L.Icon.Default.imagePath = './images';
+
     var init = function () {
         var map = init.map = new L.Map('map', {
             center: new L.LatLng(0, 0),
