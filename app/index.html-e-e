@@ -18,8 +18,8 @@
     <body>
         <div class="container">
             <div class="surround" id="header">
-                <h1 class="title">World News
-                    <small>-- as reported by the <em>New York Times</em></small></h1>
+                <h2 class="title">World News
+                    <small>(as reported by the <em>New York Times</em>)</small></h2>
                 <div id="dates"></div>
             </div>
 
@@ -27,7 +27,7 @@
 
             <div class="surround" id="barWrapper">
                 <div id="bars">
-                    <h2>Locations <small>sorted and colored by frequency</small></h2>
+                    <h3>Locations</h3>
                 </div>
             </div>
         </div>
