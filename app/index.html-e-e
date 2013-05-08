@@ -18,14 +18,17 @@
     <body>
         <div class="container">
             <div class="surround" id="header">
-                <h2>World News Map</h2>
+                <h1 class="title">World News
+                    <small>-- as reported by the <em>New York Times</em></small></h1>
                 <div id="dates"></div>
             </div>
 
             <div id="map"></div>
 
             <div class="surround" id="barWrapper">
-                <div id="bars"></div>
+                <div id="bars">
+                    <h2>Locations <small>sorted and colored by frequency</small></h2>
+                </div>
             </div>
         </div>
 

@@ -7,7 +7,7 @@ define(['d3', 'jquery'], function (d3, $) {
             w = window.innerHeight,
             h = 120 - pad.t - pad.b,
             aspect = w / h,
-            color = d3.scale.linear().range(['#6BAED6', '#053666'])
+            color = d3.scale.linear().range(['#8fc2e0', '#03213f'])
 
         var svg = d3.select('#bars').append('div')
             .attr('id', 'barDiv')
@@ -25,11 +25,11 @@ define(['d3', 'jquery'], function (d3, $) {
         var text = svg.selectAll('span')
             .data(sorted)
             .enter().append('span')
-            .attr('class', 'placeNames')
-            .text(function (d) { return d.name; })
+            .attr('class', 'locationList')
+            .text(function (d) { return d.name + ': ' + d.count; })
             .style({
-                color: function (d) { return color(d.count); },
-                "font-size": function (d) { return d.count + 8 + 'px'; }
+                color: function (d) { return color(d.count); }
+                // "font-size": function (d) { return d.count + 8 + 'px'; }
             });
     }
     return { applyData: applyData }

@@ -5,7 +5,7 @@ define(['leaflet'], function (L) {
 
     var init = function () {
         var map = init.map = new L.Map('map', {
-            center: new L.LatLng(0, 0),
+            center: new L.LatLng(20, 0),
             zoom: 2,
             maxZoom: 7,
             zoomControl: false
@@ -15,7 +15,6 @@ define(['leaflet'], function (L) {
             attribution: 'Map tiles hosted by <a href="http://mapbox.com/">MapBox</a>'
         }).addTo(map);
 
-        // map.zoomControl.setPosition('bottomleft');
     };
 
     return {
