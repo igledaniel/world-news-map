@@ -6,9 +6,10 @@ define(['leaflet'], function (L) {
     var init = function () {
         var map = init.map = new L.Map('map', {
             center: new L.LatLng(20, 0),
+            worldCopyJump: true,
             zoom: 2,
             maxZoom: 7,
-            zoomControl: false
+            zoomControl: true
         });
 
         L.tileLayer('http://d.tiles.mapbox.com/v3/nikhils.map-y5dl92k2/{z}/{x}/{y}.png', {

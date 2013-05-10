@@ -24,7 +24,7 @@ define([
                 var c = ' marker-cluster-';
                 if (childCount < 10) {
                     c += 'small';
-                } else if (childCount < 35) {
+                } else if (childCount < 30) {
                     c += 'medium';
                 } else {
                     c += 'large';
@@ -32,7 +32,7 @@ define([
                 return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
             },
             polygonOptions: {
-                weight: 2,
+                weight: 1,
                 color: 'gray',
                 fillColor: 'gray',
                 fillOpacity: 0.4
@@ -40,7 +40,7 @@ define([
         });
 
         var markerList = [];
-        var oms = new OverlappingMarkerSpiderfier(map, {keepSpiderfied: true});
+        var oms = new OverlappingMarkerSpiderfier(map, { keepSpiderfied: true });
 
         for (var i = data.length - 1; i >= 0; i--) {
             var d = data[i];
@@ -61,9 +61,15 @@ define([
             var marker = new L.Marker([d.lat, d.lon]);
 
             if (d['small_image_url'] != undefined) {
-                marker.bindPopup(markerHtmlImage)
+                marker.bindPopup(markerHtmlImage, {
+                    minWidth: 200,
+                    maxWidth: 350
+                })
             } else {
-                marker.bindPopup(markerHtmlText)
+                marker.bindPopup(markerHtmlText, {
+                    minWidth: 200,
+                    maxWidth: 350
+                })
             };
 
             markerList.push(marker);
