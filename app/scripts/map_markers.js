@@ -1,6 +1,7 @@
 define([
     'leaflet',
     'd3',
+    'crossfilter',
     'drawMap',
     'mustache',
     'text!tooltip_image.html',
@@ -8,10 +9,13 @@ define([
     'leafletmarkercluster',
     'overlappingmarker'
     ],
-    function (L, d3, drawMap, Mustache, tooltip_image, tooltip_text) {
+    function (L, d3, crossfilter, drawMap, Mustache, tooltip_image, tooltip_text) {
     'use strict';
 
-    var applyData = function (data) {
+    var applyData = function (cross) {
+        // var data = cross.top(Infinity);
+
+        // var geo = data.dimension(function (d) { return d.geo_facet; });
 
         var map = drawMap.init.map,
             formatDate = d3.time.format('%Y%m%d');
@@ -42,42 +46,58 @@ define([
         var markerList = [];
         var oms = new OverlappingMarkerSpiderfier(map, { keepSpiderfied: true });
 
-        for (var i = data.length - 1; i >= 0; i--) {
-            var d = data[i];
-            d.date = formatDate.parse(d.date);
-            d.geo_facet = d.geo_facet.join(' | ');
+        function drawMarkers(dataset) {
 
-            var templateData = {
-                title: d.title,
-                url: d.url,
-                geo_facet: d.geo_facet,
-                date: d.date.toDateString(),
-                small_image: d.small_image_url
-            }
+            markers.removeLayers(markerList);
+            map.removeLayer(markers);
 
-            var markerHtmlImage = Mustache.to_html(tooltip_image, templateData),
-                markerHtmlText = Mustache.to_html(tooltip_text, templateData);
+            for (var i = dataset.length - 1; i >= 0; i--) {
+                var d = dataset[i];
+                d.date = formatDate.parse(d.date);
+                d.geoFacetString = d.geo_facet.join(' | ');
 
-            var marker = new L.Marker([d.lat, d.lon]);
+                var templateData = {
+                    title: d.title,
+                    url: d.url,
+                    geo_facet: d.geoFacetString,
+                    date: d.date.toDateString(),
+                    small_image: d.small_image_url
+                }
 
-            if (d['small_image_url'] != undefined) {
-                marker.bindPopup(markerHtmlImage, {
-                    minWidth: 200,
-                    maxWidth: 350
-                })
-            } else {
-                marker.bindPopup(markerHtmlText, {
-                    minWidth: 200,
-                    maxWidth: 350
-                })
+                var markerHtmlImage = Mustache.to_html(tooltip_image, templateData),
+                    markerHtmlText = Mustache.to_html(tooltip_text, templateData);
+
+                var marker = new L.Marker([d.lat, d.lon]);
+
+                if (d['small_image_url'] != undefined) {
+                    marker.bindPopup(markerHtmlImage, {
+                        minWidth: 200,
+                        maxWidth: 350
+                    })
+                } else {
+                    marker.bindPopup(markerHtmlText, {
+                        minWidth: 200,
+                        maxWidth: 350
+                    })
+                };
+
+                markerList.push(marker);
+                oms.addMarker(marker);
             };
 
-            markerList.push(marker);
-            oms.addMarker(marker);
-        };
+            markers.addLayers(markerList);
+            map.addLayer(markers);
+        }
 
-        markers.addLayers(markerList);
-        map.addLayer(markers);
+        function filterGeo(location) {
+            var filtered = cross.filterFunction(function(d)  {
+                return d.indexOf(location) >= 0;
+            });
+
+            drawMarkers(cross.top(Infinity));
+        }
+
+    filterGeo('NORTH KOREA')
     }
 
     return { applyData: applyData }
