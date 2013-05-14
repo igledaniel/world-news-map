@@ -8,12 +8,11 @@ define([
     'text!tooltip_text.html',
     'leafletmarkercluster',
     'overlappingmarker'
-    ],
+],
     function (L, d3, locations_list, drawMap, Mustache, tooltip_image, tooltip_text) {
     'use strict';
 
-    var applyData = function (cross) {
-
+    var init = function () {
         var map = drawMap.init.map,
             formatDate = d3.time.format('%Y%m%d');
 
@@ -43,8 +42,8 @@ define([
         var markerList = [];
         var oms = new OverlappingMarkerSpiderfier(map, { keepSpiderfied: true });
 
-        function drawMarkers(dataset) {
-
+        var applyData = init.applyData = function (dataset) {
+            console.log(dataset);
             markers.removeLayers(markerList);
             map.removeLayer(markers);
 
@@ -59,47 +58,34 @@ define([
                     geo_facet: d.geoFacetString,
                     date: d.date.toDateString(),
                     small_image: d.small_image_url
-                }
+                };
 
                 var markerHtmlImage = Mustache.to_html(tooltip_image, templateData),
                     markerHtmlText = Mustache.to_html(tooltip_text, templateData);
 
                 var marker = new L.Marker([d.lat, d.lon]);
 
-                if (d['small_image_url'] != undefined) {
+                if (d['small_image_url'] !== undefined) {
                     marker.bindPopup(markerHtmlImage, {
                         minWidth: 200,
                         maxWidth: 350
-                    })
+                    });
                 } else {
                     marker.bindPopup(markerHtmlText, {
                         minWidth: 200,
                         maxWidth: 350
-                    })
-                };
+                    });
+                }
 
                 markerList.push(marker);
                 oms.addMarker(marker);
-            };
+            }
 
             markers.addLayers(markerList);
             map.addLayer(markers);
         }
-
-        var filterGeo = function (location) {
-            cross.filterFunction(function (d)  {
-                return d.indexOf(location) >= 0;
-            });
-
-            drawMarkers(cross.top(Infinity));
-            locations_list.applyData(cross, location);
-        };
-
-    filterGeo('INDIA')
-    // drawMarkers(cross.top(Infinity));
-    // locations_list.applyData(cross, null);
     }
 
-    return { applyData: applyData }
+    return { init: init };
 
 });
