@@ -7,7 +7,7 @@ define(['d3', 'crossfilter', 'locations_list', 'map_markers'], function (d3, cro
 
         // console.log(geo.top(Infinity))
         map_markers.applyData(geo);
-        locations_list.applyData(geo);
+        // locations_list.applyData(geo);
 
     });
 })

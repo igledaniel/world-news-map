@@ -1,7 +1,7 @@
 define([
     'leaflet',
     'd3',
-    'crossfilter',
+    'locations_list',
     'drawMap',
     'mustache',
     'text!tooltip_image.html',
@@ -9,13 +9,10 @@ define([
     'leafletmarkercluster',
     'overlappingmarker'
     ],
-    function (L, d3, crossfilter, drawMap, Mustache, tooltip_image, tooltip_text) {
+    function (L, d3, locations_list, drawMap, Mustache, tooltip_image, tooltip_text) {
     'use strict';
 
     var applyData = function (cross) {
-        // var data = cross.top(Infinity);
-
-        // var geo = data.dimension(function (d) { return d.geo_facet; });
 
         var map = drawMap.init.map,
             formatDate = d3.time.format('%Y%m%d');
@@ -89,15 +86,18 @@ define([
             map.addLayer(markers);
         }
 
-        function filterGeo(location) {
-            var filtered = cross.filterFunction(function(d)  {
+        var filterGeo = function (location) {
+            cross.filterFunction(function (d)  {
                 return d.indexOf(location) >= 0;
             });
 
             drawMarkers(cross.top(Infinity));
-        }
+            locations_list.applyData(cross, location);
+        };
 
-    filterGeo('NORTH KOREA')
+    filterGeo('INDIA')
+    // drawMarkers(cross.top(Infinity));
+    // locations_list.applyData(cross, null);
     }
 
     return { applyData: applyData }

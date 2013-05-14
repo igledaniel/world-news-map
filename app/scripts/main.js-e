@@ -4,7 +4,7 @@ require.config({
         bootstrap: 'vendor/bootstrap',
         d3: '../components/d3/d3',
         leaflet: '../components/leaflet/dist/leaflet',
-        crossfilter: '../components/crossfilter/crossfilter',
+    crossfilter: '../components/crossfilter/crossfilter',
         mustache: '../components/mustache/mustache',
         leafletmarkercluster: 'vendor/leaflet.markercluster',
         overlappingmarker: 'vendor/oms.min',
