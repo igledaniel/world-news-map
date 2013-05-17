@@ -140,7 +140,7 @@ def add_new_items():
     finalize = remove_no_lat_lon(updated)
 
     # limit size of final article list
-    chop = finalize[:250]
+    chop = finalize[:500]
 
     return chop
 

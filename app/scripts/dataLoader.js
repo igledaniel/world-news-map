@@ -1,4 +1,4 @@
-define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'filterGeo'], function (d3, crossfilter, locationsList, mapMarkers, filterGeo) {
+define(['d3', 'crossfilter', 'filterGeo'], function (d3, crossfilter, filterGeo) {
     'use strict';
 
     var formatDate = d3.time.format('%Y%m%d');
@@ -11,7 +11,8 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'filterGeo'], functi
         });
 
         var cross = crossfilter(json['articles']),
-            geo = cross.dimension(function (d) { return d.geo_facet; });
+            geo = cross.dimension(function (d) { return d.geo_facet; }),
+            dates = cross.dimension(function (d) { return d.date; });
 
         filterGeo.redraw(geo, null)
 

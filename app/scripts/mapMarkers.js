@@ -61,15 +61,9 @@ define([
                 var marker = new L.Marker([d.lat, d.lon]);
 
                 if (d['small_image_url'] !== undefined) {
-                    marker.bindPopup(markerHtmlImage, {
-                        minWidth: 200,
-                        maxWidth: 350
-                    });
+                    marker.bindPopup(markerHtmlImage);
                 } else {
-                    marker.bindPopup(markerHtmlText, {
-                        minWidth: 200,
-                        maxWidth: 350
-                    });
+                    marker.bindPopup(markerHtmlText);
                 }
 
                 markerList.push(marker);

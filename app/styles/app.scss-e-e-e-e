@@ -4,14 +4,14 @@ body, html, .container {
     font-family: 'Gentium Basic', serif;
 }
 
-div#map { width: 100%; height: 72%; }
+div#map { width: 100%; height: 78%; }
 
 h1, h2, h3, h4, .locationList {
     // font-family: 'Gentium Basic', serif;
 }
 
-h1.title, h2.title {
-    padding: 6px;
+h1.title, h3.title {
+    padding: 0px;
     margin-left: 8px;
 }
 
@@ -19,29 +19,32 @@ div.surround {
     width: 100%;
     background-color: white;
     position: relative;
-    z-index: 1000;
+    z-index: 10;
 }
 
 div#header {
-    height: 8%;
+    position: fixed;
+    height: 40px;
     top: 0;
     -webkit-box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.4);
     -moz-box-shadow:    0px 3px 6px rgba(50, 50, 50, 0.4);
     box-shadow:         0px 3px 6px rgba(50, 50, 50, 0.4);
 }
 
-div#barWrapper {
+div#footerWrapper {
     -webkit-box-shadow: 0px -3px 6px rgba(50, 50, 50, 0.4);
     -moz-box-shadow:    0px -3px 6px rgba(50, 50, 50, 0.4);
     box-shadow:         0px -3px 6px rgba(50, 50, 50, 0.4);
-    height: 18%;
+    height: 22%;
     overflow-y: scroll;
     bottom: 0;
 }
 
-div#bars {
-    padding: 6px;
-    margin-left: 10px;
+div#place, div#time {
+    float: left;
+    padding: 0px;
+    margin: 6px 12px 0px 12px;
+    width: 45%;
 }
 
 div.leaflet-popup-content { overflow: auto; }
@@ -68,4 +71,10 @@ h3 {
 
 h6 {
     line-height: 16px;
+}
+
+small#reset {
+    display: none;
+    opacity: 0;
+    cursor: pointer;
 }

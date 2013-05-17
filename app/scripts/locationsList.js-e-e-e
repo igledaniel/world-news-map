@@ -6,24 +6,16 @@ define(['d3', 'jquery'], function (d3, $) {
             mapMarkers = require('mapMarkers'),
             markers = mapMarkers.init.markers;
 
-        var pad = { t: 10, r: 30, b: 30, l: 35 },
-            w = window.innerHeight,
-            h = 120 - pad.t - pad.b,
-            aspect = w / h,
-            color = d3.scale.linear().range(['#8fc2e0', '#03213f']);
+        var color = d3.scale.linear().range(['#8fc2e0', '#03213f']);
 
-        var svg = d3.select('#bars').append('div')
-            .attr('id', 'barDiv')
-            .attr('viewBox', '0 0 ' + w + ' ' + h)
-            .attr('preserveAspectRatio', 'xMidYMid')
-        .append('g')
-            .attr('transform', 'translate(' + pad.l + ',' + pad.t + ')');
+        var placeDiv = d3.select('#place').append('div')
+            .attr('id', 'placeDiv');
 
         var applyData = init.applyData = function (geo, dataset) {
 
             color.domain(d3.extent(dataset, function (d) { return d.value; }));
 
-            var sorted = dataset.sort(function (a, b) {
+            dataset.sort(function (a, b) {
                 return b.value - a.value;
             });
 
@@ -38,7 +30,7 @@ define(['d3', 'jquery'], function (d3, $) {
                 filterGeo.redraw(geo, key);
             }
 
-            var text = svg.selectAll('span')
+            var text = placeDiv.selectAll('span')
                 .data(dataset);
 
             text.enter().append('span')
@@ -46,7 +38,8 @@ define(['d3', 'jquery'], function (d3, $) {
                 .text(function (d) { return d.key + ': ' + d.value; })
                 .style({
                     color: function (d) { return color(d.value); },
-                    opacity: 1e-6
+                    opacity: 1e-6,
+                    cursor: 'pointer'
                 })
                 .on('click', function (d) {
                     filterClick(d.key);
