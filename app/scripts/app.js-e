@@ -1,5 +1,5 @@
 /*global define */
-define(['drawMap', 'dataLoader', 'mapMarkers', 'locationsList', 'timeSeries'], function (drawMap, dataLoader, mapMarkers, locationsList, timeSeries) {
+define(['drawMap', 'dataLoader', 'mapMarkers', 'locationsList', 'timeSeries', 'filterGeo'], function (drawMap, dataLoader, mapMarkers, locationsList, timeSeries, filterGeo) {
     'use strict';
     drawMap.init();
     mapMarkers.init();

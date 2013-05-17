@@ -1,28 +1,43 @@
 define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], function (d3, crossfilter, locationsList, mapMarkers, timeSeries) {
     'use strict';
 
-    var redraw = function (data, location) {
+    var setData = function (cross) {
 
-        if (location) {
-            data.filterFunction(function (d)  {
-                return d.indexOf(location) >= 0;
+        var geo = cross.dimension(function (d) { return d.geo_facet; }),
+            dates = cross.dimension(function (d) { return d.date; });
+
+        var redraw = setData.redraw = function (location) {
+
+            if (location) {
+                geo.filterFunction(function (d)  {
+                    return d.indexOf(location) >= 0;
+                });
+            };
+
+            var entries = {};
+
+            geo.top(Infinity).forEach(function (d) {
+                d.geo_facet.forEach(function (c) {
+                    entries[c] = (entries[c] || 0) + 1;
+                });
             });
-        };
 
-        var entries = {},
-            dates = {};
+            timeSeries.init.applyData(dates);
+            mapMarkers.init.applyData(geo.top(Infinity));
+            locationsList.init.applyData(d3.entries(entries));
+        }
 
-        data.top(Infinity).forEach(function (d) {
-            d.geo_facet.forEach(function (c) {
-                entries[c] = (entries[c] || 0) + 1;
-            });
-            dates[d.date] = (dates[d.date] || 0) + 1;
-        });
-        console.log(dates)
-        mapMarkers.init.applyData(data, data.top(Infinity));
-        locationsList.init.applyData(data, d3.entries(entries));
-        timeSeries.init.applyData(data, d3.entries(dates));
+        redraw();
+
+        function reset() {
+            geo.filterAll();
+            d3.select(this).style('display', 'none');
+            redraw(null);
+        }
+
+        d3.select('#reset')
+            .on('click', reset);
     };
 
-    return { redraw: redraw };
+    return { setData: setData };
 });

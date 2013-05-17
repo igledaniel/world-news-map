@@ -1,4 +1,4 @@
-define(['d3', 'crossfilter', 'filterGeo'], function (d3, crossfilter, filterGeo) {
+define(['d3', 'crossfilter', 'filterGeo', 'timeSeries'], function (d3, crossfilter, filterGeo, timeSeries) {
     'use strict';
 
     var formatDate = d3.time.format('%Y%m%d');
@@ -10,19 +10,8 @@ define(['d3', 'crossfilter', 'filterGeo'], function (d3, crossfilter, filterGeo)
             d.geoFacetString = d.geo_facet.join(' | ');
         });
 
-        var cross = crossfilter(json['articles']),
-            geo = cross.dimension(function (d) { return d.geo_facet; }),
-            dates = cross.dimension(function (d) { return d.date; });
+        var cross = crossfilter(json['articles']);
 
-        filterGeo.redraw(geo, null)
-
-        function reset() {
-            geo.filterAll();
-            d3.select(this).style('display', 'none');
-            filterGeo.redraw(geo, null);
-        }
-
-        d3.select('#reset')
-            .on('click', reset);
+        filterGeo.setData(cross)
     });
 });

@@ -3,10 +3,10 @@ define(['d3'], function (d3) {
     'use strict';
     var init = function () {
 
-        var pad = { t: 10, r: 30, b: 30, l: 35 },
+        var pad = { t: 10, r: 10, b: 10, l: 10 },
             div = document.getElementById('footerWrapper'),
-            w = div.clientHeight,
-            h = div.clientWidth,
+            h = div.clientHeight - pad.t - pad.b,
+            w = div.clientWidth - pad.l - pad.r,
             aspect = w / h;
 
         var x = d3.time.scale().range([0, w]),
@@ -24,36 +24,42 @@ define(['d3'], function (d3) {
             .x(function (d) { return x(d.key); })
             .y(function (d) { return y(d.value); });
 
-        var svg = d3.select('#time').append('svg')
+        var svg = d3.select('#timeFixed').append('svg')
             .attr("id", "timeSeries")
-            .attr("viewBox", "0 0 " + w + " " + h )
+            .attr("viewBox", "0 0 " + (w + pad.r + pad.l) + " " + (h + pad.t + pad.b) )
             .attr("preserveAspectRatio", "xMidYMid meet")
         .append('g')
             .attr('transform', 'translate(' + pad.l + ',' + pad.t + ')');
 
-        var applyData = init.applyData = function (cross, data) {
+        var applyData = init.applyData = function (dates) {
 
-            console.log(data);
+            var data = dates.group().all();
 
             x.domain(d3.extent(data, function (d) { return d.key; }));
             y.domain(d3.extent(data, function (d) { return d.value; }));
 
-            console.log(x.domain(), y.domain())
             svg.append('g')
                 .attr('class', 'x axis')
-                .attr('transform', 'translate(0,' + h + ')')
-                .call(xAxis);
+                .attr('transform', 'translate(0,' + h + ')');
 
             svg.append("g")
                 .attr({
                     class: "y axis"
-                })
+                });
+
+            var series = svg.append('path')
+                .datum(data)
+                .attr('class', 'line');
+
+            d3.selectAll('.line').transition()
+                .attr('d', line);
+
+            d3.transition(svg).select(".y.axis")
                 .call(yAxis);
 
-            svg.append('path')
-                .datum(data)
-                .attr('class', 'line')
-                .attr('d', line);
+            d3.transition(svg).select(".x.axis")
+                .attr("transform", "translate(0," + h + ")")
+                .call(xAxis);
         };
     };
 

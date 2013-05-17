@@ -11,7 +11,7 @@ define(['d3', 'jquery'], function (d3, $) {
         var placeDiv = d3.select('#place').append('div')
             .attr('id', 'placeDiv');
 
-        var applyData = init.applyData = function (geo, dataset) {
+        var applyData = init.applyData = function (dataset) {
 
             color.domain(d3.extent(dataset, function (d) { return d.value; }));
 
@@ -27,7 +27,7 @@ define(['d3', 'jquery'], function (d3, $) {
                     });
 
                 markers.clearLayers();
-                filterGeo.redraw(geo, key);
+                filterGeo.setData.redraw(key);
             }
 
             var text = placeDiv.selectAll('span')

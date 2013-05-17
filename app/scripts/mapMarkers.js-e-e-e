@@ -40,7 +40,7 @@ define([
 
 
 
-        var applyData = init.applyData = function (geo, dataset) {
+        var applyData = init.applyData = function (dataset) {
             var markerList = [];
             var oms = new OverlappingMarkerSpiderfier(map, { keepSpiderfied: true });
 
