@@ -1,28 +1,27 @@
-define(['d3', 'crossfilter', 'locations_list', 'map_markers'], function (d3, crossfilter, locations_list, map_markers) {
+define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'filterGeo'], function (d3, crossfilter, locationsList, mapMarkers, filterGeo) {
     'use strict';
 
-    d3.json('python/nyt_geo.json', function (json) {
+    var formatDate = d3.time.format('%Y%m%d');
+
+    d3.json('python/nyt_geo.json', function (error, json) {
+
+        json['articles'].forEach(function (d) {
+            d.date = formatDate.parse(d.date);
+            d.geoFacetString = d.geo_facet.join(' | ');
+        });
+
         var cross = crossfilter(json['articles']),
             geo = cross.dimension(function (d) { return d.geo_facet; });
 
-        var filterGeo = function (location) {
-            geo.filterFunction(function (d)  {
-                return d.indexOf(location) >= 0;
-            });
+        filterGeo.redraw(geo, null)
 
-            var entries = {};
+        function reset() {
+            geo.filterAll();
+            d3.select(this).style('display', 'none');
+            filterGeo.redraw(geo, null);
+        }
 
-            geo.top(Infinity).forEach(function (d) {
-                d.geo_facet.forEach(function (c) {
-                    entries[c] = (entries[c] || 0) + 1;
-                })
-            });
-
-            map_markers.init.applyData(geo.top(Infinity));
-            locations_list.init.applyData(d3.entries(entries));
-        };
-
-        filterGeo('UNITED STATES');
-
+        d3.select('#reset')
+            .on('click', reset);
     });
 });

@@ -1,7 +1,7 @@
 define([
     'leaflet',
     'd3',
-    'locations_list',
+    'locationsList',
     'drawMap',
     'mustache',
     'text!tooltip_image.html',
@@ -9,14 +9,13 @@ define([
     'leafletmarkercluster',
     'overlappingmarker'
 ],
-    function (L, d3, locations_list, drawMap, Mustache, tooltip_image, tooltip_text) {
+    function (L, d3, locationsList, drawMap, Mustache, tooltip_image, tooltip_text) {
     'use strict';
 
     var init = function () {
-        var map = drawMap.init.map,
-            formatDate = d3.time.format('%Y%m%d');
+        var map = drawMap.init.map;
 
-        var markers = new L.MarkerClusterGroup({
+        var markers = init.markers = new L.MarkerClusterGroup({
             disableClusteringAtZoom: 7,
             iconCreateFunction: function (cluster) {
                 var childCount = cluster.getChildCount();
@@ -39,18 +38,14 @@ define([
             }
         });
 
-        var markerList = [];
-        var oms = new OverlappingMarkerSpiderfier(map, { keepSpiderfied: true });
 
-        var applyData = init.applyData = function (dataset) {
-            console.log(dataset);
-            markers.removeLayers(markerList);
-            map.removeLayer(markers);
+
+        var applyData = init.applyData = function (geo, dataset) {
+            var markerList = [];
+            var oms = new OverlappingMarkerSpiderfier(map, { keepSpiderfied: true });
 
             for (var i = dataset.length - 1; i >= 0; i--) {
                 var d = dataset[i];
-                d.date = formatDate.parse(d.date);
-                d.geoFacetString = d.geo_facet.join(' | ');
 
                 var templateData = {
                     title: d.title,
@@ -83,6 +78,9 @@ define([
 
             markers.addLayers(markerList);
             map.addLayer(markers);
+
+            var markerBounds = markers.getBounds();
+            map.fitBounds(markerBounds);
         }
     }
 

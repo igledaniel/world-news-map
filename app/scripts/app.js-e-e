@@ -1,9 +1,9 @@
 /*global define */
-define(['drawMap', 'dataLoader', 'map_markers', 'locations_list'], function (drawMap, dataLoader, map_markers, locations_list) {
+define(['drawMap', 'dataLoader', 'mapMarkers', 'locationsList'], function (drawMap, dataLoader, mapMarkers, locationsList) {
     'use strict';
     drawMap.init();
-    map_markers.init();
-    locations_list.init();
+    mapMarkers.init();
+    locationsList.init();
 
     dataLoader;
 
