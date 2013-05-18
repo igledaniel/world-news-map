@@ -3,19 +3,19 @@ define(['d3', 'jquery'], function (d3, $) {
     'use strict';
     var init = function () {
 
-        var pad = { t: 20, r: 20, b: 20, l: 30 },
+        var pad = { t: 20, r: 50, b: 20, l: 30 },
             div = document.getElementById('timeFixed'),
-            h = 150 - pad.t - pad.b,
+            h = 160 - pad.t - pad.b,
             w = $('#timeFixed').width() - pad.r - pad.l;
 
         var x = d3.time.scale().rangeRound([0, w]),
-            y = d3.scale.linear().range([h, 0]);
+            y = d3.scale.linear().rangeRound([h, 0]);
 
         var xAxis = d3.svg.axis()
             .scale(x)
             .tickSubdivide(6)
             .tickSize(6, 3, 0)
-            .ticks(10)
+            // .ticks(10)
             .tickFormat(d3.time.format('%m' + '/' + '%d'))
             .orient('bottom');
 
@@ -24,10 +24,6 @@ define(['d3', 'jquery'], function (d3, $) {
             .ticks(6)
             .tickFormat(d3.format('d'))
             .orient('left');
-
-        var line = d3.svg.line()
-            .x(function (d) { return x(d.key); })
-            .y(function (d) { return y(d.value); });
 
         var svg = d3.select('#timeFixed').append('svg')
             .attr("id", "timeSeries")
@@ -38,8 +34,8 @@ define(['d3', 'jquery'], function (d3, $) {
 
         var applyData = init.applyData = function (dates) {
             w = $('#timeFixed').width() - pad.r - pad.l;
-            x.range([0, w]);
-
+            x.rangeRound([0, w]);
+            xAxis.scale(x);
             svg.attr('width', w + pad.r + pad.l);
 
             var data = dates.group().all();
@@ -72,42 +68,23 @@ define(['d3', 'jquery'], function (d3, $) {
                 .attr('class', 'rectGroup')
                 .attr("transform", function(d) { return "translate(" + x(d.key) + "," + y(d.value) + ")"; });;
 
+            console.log(data);
+
             seriesEnter.append("rect")
                 .attr({
                     class: 'histRect',
-                    x: function (d) { return x(d.key) + divider/2; },
-                    width: divider,
-                    height: function (d) { return h - y(d.value); },
                     fill: "#ddd"
                 });
 
             d3.selectAll('.histRect').transition().duration(250)
                 .attr({
-                    x: function (d) { return x(d.key) + divider/2; },
-                    width: divider,
+                    x: divider / 2,
+                    width: divider - 2,
                     height: function (d) { return h - y(d.value); }
                 });
 
             series.transition().duration(250)
                 .attr("transform", function(d) { return "translate(" + x(d.key) + "," + y(d.value) + ")"; });
-
-            // d3.selectAll('.line').transition().duration(200)
-            //     .attr('d', line);
-
-            // var series = svg.selectAll('.lineGroup')
-            //     .data(data);
-
-            // var seriesEnter = series.enter().append('g')
-            //     .attr('class', 'lineGroup');
-
-            // seriesEnter.append('path')
-            //     .attr('class', 'line')
-            //     .datum(data)
-            //     .attr('d', line);
-
-            // d3.selectAll('.line').transition().duration(200)
-            //     .attr('d', line);
-
         };
 
     };
