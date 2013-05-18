@@ -26,7 +26,7 @@
 
             <div class="surround" id="footerWrapper">
                 <div id="time">
-                    <div id="timeFixed"></div>
+                    <div id="timeAbs"><div id="timeFixed"></div></div>
                 </div>
                 <div id="place">
                     <h3>Places <small id="reset">(reset)</small></h3>

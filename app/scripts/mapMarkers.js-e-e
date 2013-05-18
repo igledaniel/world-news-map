@@ -23,7 +23,7 @@ define([
                 var c = ' marker-cluster-';
                 if (childCount < 10) {
                     c += 'small';
-                } else if (childCount < 30) {
+                } else if (childCount < 50) {
                     c += 'medium';
                 } else {
                     c += 'large';
@@ -37,8 +37,6 @@ define([
                 fillOpacity: 0.4
             }
         });
-
-
 
         var applyData = init.applyData = function (dataset) {
             var markerList = [];

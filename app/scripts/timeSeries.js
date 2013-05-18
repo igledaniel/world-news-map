@@ -3,7 +3,7 @@ define(['d3', 'jquery'], function (d3, $) {
     'use strict';
     var init = function () {
 
-        var pad = { t: 20, r: 50, b: 20, l: 30 },
+        var pad = { t: 20, r: 40, b: 20, l: 30 },
             div = document.getElementById('timeFixed'),
             h = 160 - pad.t - pad.b,
             w = $('#timeFixed').width() - pad.r - pad.l;
@@ -15,7 +15,6 @@ define(['d3', 'jquery'], function (d3, $) {
             .scale(x)
             .tickSubdivide(6)
             .tickSize(6, 3, 0)
-            // .ticks(10)
             .tickFormat(d3.time.format('%m' + '/' + '%d'))
             .orient('bottom');
 
@@ -36,7 +35,7 @@ define(['d3', 'jquery'], function (d3, $) {
             w = $('#timeFixed').width() - pad.r - pad.l;
             x.range([0, w]);
             xAxis.scale(x);
-            svg.attr('width', w + pad.r + pad.l);
+            d3.select('#timeSeries').attr('width', w + pad.r + pad.l);
 
             var data = dates.group().all();
 
@@ -49,12 +48,10 @@ define(['d3', 'jquery'], function (d3, $) {
                 .attr('class', 'x axis')
                 .attr('transform', 'translate(0,' + h + ')');
 
-            svg.append("g")
-                .attr({
-                    class: "y axis"
-                });
+            svg.append('g')
+                .attr('class', 'y axis');
 
-            d3.transition(svg).select(".y.axis")
+            svg.transition().duration(300).select(".y.axis")
                 .call(yAxis);
 
             d3.transition(svg).select(".x.axis")
@@ -71,17 +68,17 @@ define(['d3', 'jquery'], function (d3, $) {
             seriesEnter.append("rect")
                 .attr({
                     class: 'histRect',
-                    fill: "#ddd"
+                    fill: "#bfbfbf"
                 });
 
-            d3.selectAll('.histRect').transition().duration(250)
+            d3.selectAll('.histRect').transition().duration(300)
                 .attr({
                     x: divider / 2,
                     width: divider - 3,
                     height: function (d) { return h - y(d.value); }
                 });
 
-            series.transition().duration(250)
+            series.transition().duration(300)
                 .attr("transform", function(d) { return "translate(" + x(d.key) + "," + y(d.value) + ")"; });
         };
 

@@ -40,26 +40,37 @@ div#footerWrapper {
     position: relative;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 760px) {
     div#place, div#time {
         float: left;
         padding: 0px;
         margin: 6px 6px 0px 12px;
         width: 95%;
     }
+    div#timeFixed {
+        // position: fixed;
+        width: 100%;
+    }
+    div#timeAbs {
+        position: relative;
+    }
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 760px) {
     div#place, div#time {
+        position: relative;
         float: left;
         padding: 0px;
         margin: 6px 12px 0px 12px;
         width: 45%;
     }
-}
-
-div#timeFixed {
-    width: 100%;
+    div#timeFixed {
+        position: fixed;
+        width: 45%;
+    }
+    div#timeAbs {
+        position: absolute;
+    }
 }
 
 div.leaflet-popup-content { overflow: auto; }
