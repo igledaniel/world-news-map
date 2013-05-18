@@ -3,9 +3,9 @@ define(['d3', 'jquery'], function (d3, $) {
     'use strict';
     var init = function () {
 
-        var pad = { t: 20, r: 40, b: 20, l: 30 },
+        var pad = { t: 40, r: 40, b: 20, l: 30 },
             div = document.getElementById('timeFixed'),
-            h = 160 - pad.t - pad.b,
+            h = 150 - pad.t - pad.b,
             w = $('#timeFixed').width() - pad.r - pad.l;
 
         var x = d3.time.scale().range([0, w]),

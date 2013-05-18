@@ -16,7 +16,7 @@ define([
         var map = drawMap.init.map;
 
         var markers = init.markers = new L.MarkerClusterGroup({
-            disableClusteringAtZoom: 7,
+            // disableClusteringAtZoom: 5,
             iconCreateFunction: function (cluster) {
                 var childCount = cluster.getChildCount();
 

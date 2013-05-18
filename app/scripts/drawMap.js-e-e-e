@@ -5,11 +5,10 @@ define(['leaflet'], function (L) {
 
     var init = function () {
         var map = init.map = new L.Map('map', {
-            center: new L.LatLng(20, 0),
             worldCopyJump: true,
-            zoom: 2,
-            maxZoom: 7,
-            zoomControl: true,
+            minZoom: 1,
+            maxZoom: 6,
+            zoomControl: false,
             attributionControl: false
         });
 
