@@ -35,6 +35,10 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
             redraw(null);
         }
 
+        window.onresize = function () {
+            timeSeries.init.applyData(dates);
+        }
+
         d3.select('#reset')
             .on('click', reset);
     };

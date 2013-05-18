@@ -4,13 +4,13 @@ body, html, .container {
     font-family: 'Gentium Basic', serif;
 }
 
-div#map { width: 100%; height: 78%; }
+div#map { width: 100%; height: 66%; }
 
 h1, h2, h3, h4, .locationList {
     // font-family: 'Gentium Basic', serif;
 }
 
-h1.title, h3.title {
+h1.title, h4.title {
     padding: 0px;
     margin-left: 8px;
 }
@@ -22,8 +22,8 @@ div.surround {
 }
 
 div#header {
-    position: fixed;
-    height: 40px;
+    position: relative;
+    height: 4%;
     top: 0;
     -webkit-box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.4);
     -moz-box-shadow:    0px 3px 6px rgba(50, 50, 50, 0.4);
@@ -34,27 +34,31 @@ div#footerWrapper {
     -webkit-box-shadow: 0px -3px 6px rgba(50, 50, 50, 0.4);
     -moz-box-shadow:    0px -3px 6px rgba(50, 50, 50, 0.4);
     box-shadow:         0px -3px 6px rgba(50, 50, 50, 0.4);
-    height: 22%;
+    height: 28%;
     overflow-y: scroll;
     bottom: 0;
     position: relative;
 }
 
-div#place, div#time {
-    // float: left;
-    padding: 0px;
-    margin: 6px 12px 0px 12px;
-    width: 45%;
+@media screen and (max-width: 700px) {
+    div#place, div#time {
+        float: left;
+        padding: 0px;
+        margin: 6px 6px 0px 12px;
+        width: 95%;
+    }
 }
 
-div#time {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
+@media screen and (min-width: 960px) {
+    div#place, div#time {
+        float: left;
+        padding: 0px;
+        margin: 6px 12px 0px 12px;
+        width: 45%;
+    }
 }
 
 div#timeFixed {
-    // position: fixed;
     width: 100%;
 }
 
@@ -105,4 +109,8 @@ small#reset {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+
+.axis text {
+    font: 12px sans-serif;
 }
