@@ -8,8 +8,8 @@ define(['d3', 'jquery'], function (d3, $) {
             h = 160 - pad.t - pad.b,
             w = $('#timeFixed').width() - pad.r - pad.l;
 
-        var x = d3.time.scale().rangeRound([0, w]),
-            y = d3.scale.linear().rangeRound([h, 0]);
+        var x = d3.time.scale().range([0, w]),
+            y = d3.scale.linear().range([h, 0]);
 
         var xAxis = d3.svg.axis()
             .scale(x)
@@ -34,7 +34,7 @@ define(['d3', 'jquery'], function (d3, $) {
 
         var applyData = init.applyData = function (dates) {
             w = $('#timeFixed').width() - pad.r - pad.l;
-            x.rangeRound([0, w]);
+            x.range([0, w]);
             xAxis.scale(x);
             svg.attr('width', w + pad.r + pad.l);
 
@@ -66,9 +66,7 @@ define(['d3', 'jquery'], function (d3, $) {
 
             var seriesEnter = series.enter().append('g')
                 .attr('class', 'rectGroup')
-                .attr("transform", function(d) { return "translate(" + x(d.key) + "," + y(d.value) + ")"; });;
-
-            console.log(data);
+                .attr("transform", function(d) { return "translate(" + (x(d.key) / 2) + "," + y(d.value) + ")"; });;
 
             seriesEnter.append("rect")
                 .attr({
@@ -79,7 +77,7 @@ define(['d3', 'jquery'], function (d3, $) {
             d3.selectAll('.histRect').transition().duration(250)
                 .attr({
                     x: divider / 2,
-                    width: divider - 2,
+                    width: divider - 3,
                     height: function (d) { return h - y(d.value); }
                 });
 
