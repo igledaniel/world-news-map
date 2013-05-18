@@ -46,7 +46,7 @@ define(['d3', 'jquery'], function (d3, $) {
 
             svg.append('g')
                 .attr('class', 'x axis')
-                .attr('transform', 'translate(0,' + h + ')');
+                .attr('transform', 'translate(' + divider + ',' + h + ')');
 
             svg.append('g')
                 .attr('class', 'y axis');
@@ -55,7 +55,7 @@ define(['d3', 'jquery'], function (d3, $) {
                 .call(yAxis);
 
             d3.transition(svg).select(".x.axis")
-                .attr("transform", "translate(0," + h + ")")
+                .attr("transform", "translate(" + divider + ',' + h + ")")
                 .call(xAxis);
 
             var series = svg.selectAll('.rectGroup')
@@ -63,7 +63,7 @@ define(['d3', 'jquery'], function (d3, $) {
 
             var seriesEnter = series.enter().append('g')
                 .attr('class', 'rectGroup')
-                .attr("transform", function(d) { return "translate(" + (x(d.key) / 2) + "," + y(d.value) + ")"; });;
+                .attr("transform", function(d) { return "translate(" + (x(d.key) / 2) + "," + y(d.value) + ")"; });
 
             seriesEnter.append("rect")
                 .attr({
@@ -73,13 +73,13 @@ define(['d3', 'jquery'], function (d3, $) {
 
             d3.selectAll('.histRect').transition().duration(300)
                 .attr({
-                    x: divider / 2,
-                    width: divider - 3,
+                    x: 1,
+                    width: divider - 2,
                     height: function (d) { return h - y(d.value); }
                 });
 
             series.transition().duration(300)
-                .attr("transform", function(d) { return "translate(" + x(d.key) + "," + y(d.value) + ")"; });
+                .attr("transform", function(d) { return "translate(" + (x(d.key) + divider / 2) + "," + y(d.value) + ")"; });
         };
 
     };
