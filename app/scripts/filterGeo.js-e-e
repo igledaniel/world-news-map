@@ -29,8 +29,6 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
             locationsList.init.applyData(d3.entries(entries));
         }
 
-        redrawGeo();
-
         var redrawDate = setData.redrawDate = function (range) {
             markers.clearLayers();
             dates.filterRange(range)
@@ -59,6 +57,9 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
 
         d3.select('#reset')
             .on('click', reset);
+
+        redrawGeo();
+
     };
 
     return { setData: setData };

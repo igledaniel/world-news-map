@@ -9,19 +9,17 @@ define(['d3', 'jquery'], function (d3, $) {
             w = $('#timeFixed').width() - pad.r - pad.l,
             filterGeo = require('filterGeo');
 
-        var x = d3.time.scale().range([0, w], 1),
-            y = d3.scale.linear().range([h, 0]);
+        var x = d3.time.scale().range([0, w]),
+            y = d3.scale.linear().range([h, 0]).nice();
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .tickSubdivide(6)
-            .tickSize(6, 3, 0)
             .tickFormat(d3.time.format('%m' + '/' + '%d'))
             .orient('bottom');
 
         var yAxis = d3.svg.axis()
             .scale(y)
-            .ticks(6)
+            .ticks(5)
             .tickFormat(d3.format('d'))
             .orient('left');
 
@@ -59,20 +57,19 @@ define(['d3', 'jquery'], function (d3, $) {
                 .call(yAxis);
 
             d3.transition(svg).select(".x.axis")
-                .attr("transform", "translate(0," + h + ")")
+                .attr("transform", "translate(" + divider + ',' + h + ")")
                 .call(xAxis);
 
             var brush = d3.svg.brush()
                 .x(x)
-                .on('brush', brushed)
-                .extent(x.domain());
+                .on('brush', brushed);
 
             var series = svg.selectAll('.rectGroup')
                 .data(data);
 
             var seriesEnter = series.enter().append('g')
-                .attr('class', 'rectGroup')
-                .attr("transform", function(d) { return "translate(" + (x(d.key) / 2) + "," + y(d.value) + ")"; });
+                .attr('class', 'rectGroup');
+                // .attr("transform", function(d) { return "translate(" + (x(d.key) / 2) + "," + y(d.value) + ")"; });
 
             seriesEnter.append("rect")
                 .attr({
@@ -83,23 +80,22 @@ define(['d3', 'jquery'], function (d3, $) {
             d3.selectAll('.brush').call(brush)
                 .selectAll('rect')
                 .attr('height', h)
-                .attr("transform", "translate(0," + h - (pad.t + pad.b) + ')');
+                .attr("transform", "translate(" + divider + ',0)');
 
             d3.selectAll('.histRect').transition().duration(300)
                 .attr({
-                    x: 1,
+                    x: function (d) { return x(d.key) + divider/2; },
+                    y: function (d) { return y(d.value); },
                     width: divider - 2,
                     height: function (d) { return h - y(d.value); }
                 });
 
-            series.transition().duration(300)
-                .attr("transform", function(d) { return "translate(" + x(d.key) + "," + y(d.value) + ")"; });
+            // series.transition().duration(300);
 
         function brushed () {
-            // x.domain(brush.empty() ? x.domain() : brush.extent());
-            console.log(brush.extent());
             filterGeo.setData.redrawDate(brush.extent());
         }
+
         };
 
     };
