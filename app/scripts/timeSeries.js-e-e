@@ -6,7 +6,8 @@ define(['d3', 'jquery'], function (d3, $) {
         var pad = { t: 40, r: 40, b: 20, l: 30 },
             div = document.getElementById('timeFixed'),
             h = 150 - pad.t - pad.b,
-            w = $('#timeFixed').width() - pad.r - pad.l;
+            w = $('#timeFixed').width() - pad.r - pad.l,
+            filterGeo = require('filterGeo');
 
         var x = d3.time.scale().range([0, w]),
             y = d3.scale.linear().range([h, 0]);
@@ -58,6 +59,11 @@ define(['d3', 'jquery'], function (d3, $) {
                 .attr("transform", "translate(" + divider + ',' + h + ")")
                 .call(xAxis);
 
+            var brush = d3.svg.brush()
+                .x(x)
+                .on('brush', brushed)
+                .extent(x.domain());
+
             var series = svg.selectAll('.rectGroup')
                 .data(data);
 
@@ -71,6 +77,14 @@ define(['d3', 'jquery'], function (d3, $) {
                     fill: "#bfbfbf"
                 });
 
+            var gBrush = svg.append('g')
+                .attr('class', 'brush')
+                .call(brush)
+            .selectAll('rect')
+                .attr('height', h)
+                .attr('x', divider)
+                .attr("transform", "translate(0," + h - (pad.t + pad.b) + ')');
+
             d3.selectAll('.histRect').transition().duration(300)
                 .attr({
                     x: 1,
@@ -80,6 +94,11 @@ define(['d3', 'jquery'], function (d3, $) {
 
             series.transition().duration(300)
                 .attr("transform", function(d) { return "translate(" + (x(d.key) + divider / 2) + "," + y(d.value) + ")"; });
+
+        function brushed () {
+            // x.domain(brush.empty() ? x.domain() : brush.extent());
+            console.log(brush.extent());
+        }
         };
 
     };
