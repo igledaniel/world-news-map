@@ -9,7 +9,7 @@ define(['d3', 'jquery'], function (d3, $) {
             w = $('#timeFixed').width() - pad.r - pad.l,
             filterGeo = require('filterGeo');
 
-        var x = d3.time.scale().range([0, w]),
+        var x = d3.time.scale().range([0, w], 1),
             y = d3.scale.linear().range([h, 0]);
 
         var xAxis = d3.svg.axis()
@@ -31,6 +31,9 @@ define(['d3', 'jquery'], function (d3, $) {
             .attr('height', h + pad.t + pad.b)
         .append('g')
             .attr('transform', 'translate(' + pad.l + ',' + pad.t + ')');
+
+        var gBrush = svg.append('g')
+                .attr('class', 'brush');
 
         var applyData = init.applyData = function (dates) {
             w = $('#timeFixed').width() - pad.r - pad.l;
@@ -56,7 +59,7 @@ define(['d3', 'jquery'], function (d3, $) {
                 .call(yAxis);
 
             d3.transition(svg).select(".x.axis")
-                .attr("transform", "translate(" + divider + ',' + h + ")")
+                .attr("transform", "translate(0," + h + ")")
                 .call(xAxis);
 
             var brush = d3.svg.brush()
@@ -77,12 +80,9 @@ define(['d3', 'jquery'], function (d3, $) {
                     fill: "#bfbfbf"
                 });
 
-            var gBrush = svg.append('g')
-                .attr('class', 'brush')
-                .call(brush)
-            .selectAll('rect')
+            d3.selectAll('.brush').call(brush)
+                .selectAll('rect')
                 .attr('height', h)
-                .attr('x', divider)
                 .attr("transform", "translate(0," + h - (pad.t + pad.b) + ')');
 
             d3.selectAll('.histRect').transition().duration(300)
@@ -93,11 +93,12 @@ define(['d3', 'jquery'], function (d3, $) {
                 });
 
             series.transition().duration(300)
-                .attr("transform", function(d) { return "translate(" + (x(d.key) + divider / 2) + "," + y(d.value) + ")"; });
+                .attr("transform", function(d) { return "translate(" + x(d.key) + "," + y(d.value) + ")"; });
 
         function brushed () {
             // x.domain(brush.empty() ? x.domain() : brush.extent());
             console.log(brush.extent());
+            filterGeo.setData.redrawDate(brush.extent());
         }
         };
 

@@ -2,9 +2,7 @@ define(['d3', 'jquery'], function (d3, $) {
     'use strict';
 
     var init = function () {
-        var filterGeo = require('filterGeo'),
-            mapMarkers = require('mapMarkers'),
-            markers = mapMarkers.init.markers;
+        var filterGeo = require('filterGeo');
 
         var color = d3.scale.linear().range(['#8fc2e0', '#03213f']);
 
@@ -26,8 +24,7 @@ define(['d3', 'jquery'], function (d3, $) {
                         opacity: 1.0
                     });
 
-                markers.clearLayers();
-                filterGeo.setData.redraw(key);
+                filterGeo.setData.redrawGeo(key);
             }
 
             var text = placeDiv.selectAll('span')
