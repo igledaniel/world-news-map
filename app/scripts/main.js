@@ -1,7 +1,5 @@
 require.config({
     paths: {
-        jquery: '../components/jquery/jquery',
-        bootstrap: 'vendor/bootstrap',
         d3: '../components/d3/d3',
         leaflet: '../components/leaflet/dist/leaflet',
     crossfilter: '../components/crossfilter/crossfilter',
@@ -12,10 +10,6 @@ require.config({
         propertyParser: 'vendor/requirejs-plugins/propertyParser'
     },
     shim: {
-        bootstrap: {
-            deps: ['jquery'],
-            exports: 'jquery'
-        },
         d3: {
             exports: 'd3'
         },
@@ -37,7 +31,7 @@ require.config({
     }
 });
 
-require(['app', 'jquery', 'leaflet', 'bootstrap', 'font!google,families:[Gentium+Basic:700,400italic]'], function (app, $, L) {
+require(['app', 'leaflet', 'font!google,families:[Gentium+Basic:700,400italic]'], function (app, L) {
     'use strict';
     app;
 });

@@ -29,9 +29,15 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
             locationsList.init.applyData(d3.entries(entries));
         }
 
-        var redrawDate = setData.redrawDate = function (range) {
+        var redrawDate = setData.redrawDate = function (brush) {
             markers.clearLayers();
-            dates.filterRange(range)
+
+            if (brush.empty()) {
+                dates.filterAll();
+            } else {
+                dates.filterRange(brush.extent());
+            };
+
 
             var entries = {};
 

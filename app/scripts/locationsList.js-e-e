@@ -1,10 +1,9 @@
-define(['d3', 'jquery'], function (d3, $) {
+define(['d3'], function (d3) {
     'use strict';
 
     var init = function () {
-        var filterGeo = require('filterGeo');
-
-        var color = d3.scale.linear().range(['#8fc2e0', '#03213f']);
+        var filterGeo = require('filterGeo'),
+            color = d3.scale.linear().range(['#8fc2e0', '#03213f']);
 
         var placeDiv = d3.select('#place').append('div')
             .attr('id', 'placeDiv');
