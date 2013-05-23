@@ -32,12 +32,13 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
         var redrawDate = setData.redrawDate = function (brush) {
             markers.clearLayers();
 
-            if (brush.empty()) {
-                dates.filterAll();
-            } else {
-                dates.filterRange(brush.extent());
-            };
-
+            if (brush) {
+                if (brush.empty()) {
+                    dates.filterAll();
+                } else {
+                    dates.filterRange(brush.extent());
+                };
+            }
 
             var entries = {};
 
@@ -51,18 +52,28 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
             locationsList.init.applyData(d3.entries(entries));
         }
 
-        function reset() {
+        function resetGeo() {
             geo.filterAll();
             d3.select(this).style('display', 'none');
             redrawGeo(null);
+        }
+
+        function resetDate() {
+            timeSeries.init.clearBrush();
+            dates.filterAll();
+            d3.select(this).style('display', 'none');
+            redrawDate(null);
         }
 
         window.onresize = function () {
             timeSeries.init.applyData(dates);
         }
 
-        d3.select('#reset')
-            .on('click', reset);
+        d3.select('#resetPlace')
+            .on('click', resetGeo);
+
+        d3.select('#resetTime')
+            .on('click', resetDate);
 
         redrawGeo();
 

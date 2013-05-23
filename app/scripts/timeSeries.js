@@ -1,11 +1,11 @@
 define(['d3'], function (d3) {
-
     'use strict';
+
     var init = function () {
 
-        var pad = { t: 40, r: 40, b: 20, l: 30 },
+        var pad = { t: 10, r: 40, b: 20, l: 30 },
             div = document.getElementById('timeFixed'),
-            h = 150 - pad.t - pad.b,
+            h = 120 - pad.t - pad.b,
             w = div.offsetWidth - pad.r - pad.l,
             filterGeo = require('filterGeo'),
             color = d3.scale.linear().range(['#8fc2e0', '#03213f']);
@@ -97,8 +97,21 @@ define(['d3'], function (d3) {
                 .attr('height', h);
         }
         function brushed () {
+            if (brush.empty() === true) {
+                d3.select('#resetTime')
+                    .style('display', 'none');
+            } else {
+                d3.select('#resetTime')
+                    .style('display', 'inline');
+            };
+
             filterGeo.setData.redrawDate(brush);
         };
+
+        var clearBrush = init.clearBrush = function () {
+            brush.clear();
+            d3.selectAll('.brush').call(brush);
+        }
 
     };
 

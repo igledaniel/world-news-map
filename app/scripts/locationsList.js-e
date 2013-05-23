@@ -17,10 +17,9 @@ define(['d3'], function (d3) {
             });
 
             function filterClick(key) {
-                d3.select('#reset')
+                d3.select('#resetPlace')
                     .style({
                         display: 'inline',
-                        opacity: 1.0
                     });
 
                 filterGeo.setData.redrawGeo(key);

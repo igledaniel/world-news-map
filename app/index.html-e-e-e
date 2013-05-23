@@ -19,17 +19,21 @@
         <div class="container">
             <div class="surround" id="header">
                 <h4 class="title">World News Map
-                    <small>(<em>by Nikhil Sonnad</em>)</small></h4>
+                    <small>(about)</small></h4>
             </div>
 
             <div id="map"></div>
 
             <div class="surround" id="footerWrapper">
                 <div id="time">
-                    <div id="timeAbs"><div id="timeFixed"></div></div>
+                    <div id="timeAbs">
+                        <div id="timeFixed">
+                            <h3>Time <small id="resetTime">(reset)</small></h3>
+                        </div>
+                    </div>
                 </div>
                 <div id="place">
-                    <h3>Places <small id="reset">(reset)</small></h3>
+                    <h3>Place <small id="resetPlace">(reset)</small></h3>
                 </div>
             </div>
         </div>
