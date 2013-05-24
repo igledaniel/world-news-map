@@ -62,6 +62,8 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
             timeSeries.init.clearBrush();
             dates.filterAll();
             d3.select(this).style('display', 'none');
+            d3.select('#timeSpan')
+                    .style('display', 'none');
             redrawDate(null);
         }
 

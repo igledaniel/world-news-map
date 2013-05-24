@@ -8,16 +8,16 @@ define(['d3'], function (d3) {
             h = 120 - pad.t - pad.b,
             w = div.offsetWidth - pad.r - pad.l,
             filterGeo = require('filterGeo'),
-            color = d3.scale.linear().range(['#8fc2e0', '#03213f']);
+            color = d3.scale.linear().range(['#8fc2e0', '#03213f']),
+            formatDate = d3.time.format('%a %b %d');
 
         var x = d3.time.scale().range([0, w]),
             y = d3.scale.linear().rangeRound([h, 0]).nice();
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .tickSubdivide(6)
-            .ticks(d3.time.days, 7)
-            .tickSize(6, 3, 0)
+            .tickSubdivide(2)
+            .ticks(d3.time.days, 3)
             .tickFormat(d3.time.format('%m' + '/' + '%d'))
             .orient('bottom');
 
@@ -42,7 +42,6 @@ define(['d3'], function (d3) {
                 .attr('class', 'brush');
 
         var applyData = init.applyData = function (dates) {
-
             w = div.offsetWidth - pad.r - pad.l;
             x.range([0, w]);
             xAxis.scale(x);
@@ -89,6 +88,8 @@ define(['d3'], function (d3) {
                     height: function (d) { return h - y(d.value); }
                 });
 
+            brush.extent(brush.extent())
+
             d3.selectAll('.brush')
                 .attr('width', w + pad.l + pad.r)
                 .attr("transform", "translate(" + divider + ',' + 0 + ")")
@@ -100,9 +101,16 @@ define(['d3'], function (d3) {
             if (brush.empty() === true) {
                 d3.select('#resetTime')
                     .style('display', 'none');
+
+                d3.select('#timeSpan')
+                    .style('display', 'none');
             } else {
                 d3.select('#resetTime')
                     .style('display', 'inline');
+
+                d3.select('#timeSpan')
+                    .style('display', 'inline')
+                    .html('<small>' + formatDate(brush.extent()[0]) + ' - ' + formatDate(brush.extent()[1]) + '</small>');
             };
 
             filterGeo.setData.redrawDate(brush);
@@ -112,7 +120,6 @@ define(['d3'], function (d3) {
             brush.clear();
             d3.selectAll('.brush').call(brush);
         }
-
     };
 
     return { init: init };
