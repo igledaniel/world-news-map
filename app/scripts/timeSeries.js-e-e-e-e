@@ -65,7 +65,7 @@ define(['d3'], function (d3) {
 
             d3.transition(svg).select(".x.axis")
                 .attr('width', w + pad.l + pad.r)
-                .attr("transform", "translate(" + divider + ',' + h + ")")
+                .attr("transform", "translate(0," + h + ")")
                 .call(xAxis);
 
             var series = svg.selectAll('.rectGroup')
@@ -91,12 +91,18 @@ define(['d3'], function (d3) {
             brush.extent(brush.extent())
 
             d3.selectAll('.brush')
-                .attr('width', w + pad.l + pad.r)
-                .attr("transform", "translate(" + divider + ',' + 0 + ")")
-            .call(brush)
+                .call(brush)
                 .selectAll('rect')
                 .attr('height', h);
+
+            d3.selectAll('.x.axis line')
+                .attr('x1', divider)
+                .attr('x2', divider);
+
+            d3.selectAll('.x.axis text')
+                .attr('x', divider);
         }
+
         function brushed () {
             if (brush.empty() === true) {
                 d3.select('#resetTime')
