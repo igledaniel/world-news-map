@@ -19,7 +19,7 @@
                     <small id="aboutClick">(about)</small></h5>
             </div>
             <div class="lightbox" id="about">
-                <h5 id="aboutClose">x</h5>
+                <h4 id="aboutClose">x</h4>
                 <h4>World News Map <small>by Nikhil Sonnad</small></h4>
                 <p>Sed sem mauris, accumsan quis congue in, lacinia sed erat. Etiam ante elit, cursus in dapibus non, feugiat et elit. Pellentesque lacus justo, aliquam sit amet pharetra id, lacinia eu arcu. Pellentesque urna nibh, aliquet sit amet tristique ut, tristique ut lacus. Sed in interdum risus. In in tincidunt lectus. Sed viverra pellentesque fringilla. Mauris accumsan lectus nec nisl laoreet bibendum. Ut eu metus id nibh ornare posuere in sit amet metus. Quisque vitae augue felis, at iaculis risus. Ut at justo et dolor varius cursus vel vel arcu. Praesent vestibulum leo in orci lacinia tempus. Maecenas elementum, ante ac rutrum dignissim, dui sapien convallis ligula, nec molestie purus urna placerat nisl. Curabitur tempor venenatis mauris ut vulputate. Aenean nisl nunc, hendrerit et fringilla non, porttitor eu nibh. Aenean non justo eu est ornare fermentum.</p>
 

@@ -26,7 +26,7 @@ small#aboutClick {
     cursor: pointer;
 }
 
-h5#aboutClose {
+h4#aboutClose {
     float: right;
     text-decoration: none;
     color: gray;
