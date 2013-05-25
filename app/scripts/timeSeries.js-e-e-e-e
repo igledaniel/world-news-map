@@ -38,7 +38,7 @@ define(['d3'], function (d3) {
             // .x(x)
             .on('brush', brushed);
 
-        var gBrush = svg.append('g')
+        svg.append('g')
                 .attr('class', 'brush');
 
         var applyData = init.applyData = function (dates) {
@@ -50,17 +50,17 @@ define(['d3'], function (d3) {
 
             x.domain(d3.extent(data, function (d) { return d.key; }));
             y.domain([0, d3.max(data, function (d) { return d.value; })]);
-            color.domain(y.domain())
+            color.domain(y.domain());
 
             var xCopy = x.copy();
-            xCopy.range([0, w + divider*1.5]);
+            xCopy.range([0, w + divider * 1.5]);
 
-            x.range([divider/2, w]);
+            x.range([divider / 2, w]);
             xAxis.scale(x);
             brush.x(xCopy);
 
             svg.append('g')
-                .attr('class', 'x axis')
+                .attr('class', 'x axis');
 
             svg.append('g')
                 .attr('class', 'y axis');
@@ -87,13 +87,13 @@ define(['d3'], function (d3) {
 
             d3.selectAll('.histRect').transition().duration(300)
                 .attr({
-                    x: function (d) { return x(d.key) + divider/2; },
+                    x: function (d) { return x(d.key) + divider / 2; },
                     y: function (d) { return y(d.value); },
                     width: divider - 2,
                     height: function (d) { return h - y(d.value); }
                 });
 
-            brush.extent(brush.extent())
+            brush.extent(brush.extent());
 
             d3.selectAll('.brush')
                 .call(brush)
@@ -108,9 +108,9 @@ define(['d3'], function (d3) {
 
             d3.selectAll('.x.axis text')
                 .attr('x', divider);
-        }
+        };
 
-        function brushed () {
+        function brushed() {
             if (brush.empty() === true) {
                 d3.select('#resetTime')
                     .style('display', 'none');
@@ -124,15 +124,15 @@ define(['d3'], function (d3) {
                 d3.select('#timeSpan')
                     .style('display', 'inline')
                     .html('<small>' + formatDate(brush.extent()[0]) + ' - ' + formatDate(brush.extent()[1]) + '</small>');
-            };
+            }
 
             filterGeo.setData.redrawDate(brush);
-        };
+        }
 
         var clearBrush = init.clearBrush = function () {
             brush.clear();
             d3.selectAll('.brush').call(brush);
-        }
+        };
     };
 
     return { init: init };

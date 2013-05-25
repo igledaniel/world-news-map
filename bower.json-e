@@ -6,7 +6,9 @@
     "requirejs": "~2.1.4",
     "modernizr": "~2.6.2",
     "jquery": "~1.9.1",
-    "crossfilter": "~1.2.0"
+    "crossfilter": "~1.2.0",
+    "leaflet": "~0.5.1",
+    "d3": "~3.1.9"
   },
   "devDependencies": {}
 }

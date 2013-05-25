@@ -14,7 +14,7 @@ define([
 
     var init = function () {
         var map = drawMap.init.map,
-            dateFormat = d3.time.format('%A %B %e')
+            dateFormat = d3.time.format('%A %B %e');
 
         var markers = init.markers = new L.MarkerClusterGroup({
             // disableClusteringAtZoom: 5,
@@ -74,8 +74,8 @@ define([
 
             var markerBounds = markers.getBounds();
             map.fitBounds(markerBounds);
-        }
-    }
+        };
+    };
 
     return { init: init };
 

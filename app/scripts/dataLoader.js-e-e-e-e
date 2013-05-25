@@ -24,13 +24,13 @@ define(['d3', 'crossfilter', 'filterGeo', 'timeSeries'], function (d3, crossfilt
 
     d3.json('data/nyt_geo.json', function (error, json) {
 
-        json['articles'].forEach(function (d) {
+        json.articles.forEach(function (d) {
             d.date = formatDate.parse(d.date);
             d.geoFacetString = d.geo_facet.join(' | ');
         });
 
-        var cross = crossfilter(json['articles']);
+        var cross = crossfilter(json.articles);
 
-        filterGeo.setData(cross)
+        filterGeo.setData(cross);
     });
 });

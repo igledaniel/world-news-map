@@ -14,7 +14,7 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
                 geo.filterFunction(function (d)  {
                     return d.indexOf(location) >= 0;
                 });
-            };
+            }
 
             var entries = {};
 
@@ -27,7 +27,7 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
             timeSeries.init.applyData(dates);
             mapMarkers.init.applyData(geo.top(Infinity));
             locationsList.init.applyData(d3.entries(entries));
-        }
+        };
 
         var redrawDate = setData.redrawDate = function (brush) {
             markers.clearLayers();
@@ -37,7 +37,7 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
                     dates.filterAll();
                 } else {
                     dates.filterRange(brush.extent());
-                };
+                }
             }
 
             var entries = {};
@@ -50,7 +50,7 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
 
             mapMarkers.init.applyData(dates.top(Infinity));
             locationsList.init.applyData(d3.entries(entries));
-        }
+        };
 
         function resetGeo() {
             geo.filterAll();
@@ -69,7 +69,7 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
 
         window.onresize = function () {
             timeSeries.init.applyData(dates);
-        }
+        };
 
         d3.select('#resetPlace')
             .on('click', resetGeo);
