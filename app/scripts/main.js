@@ -1,8 +1,8 @@
 require.config({
     paths: {
-        d3: '../components/d3/d3',
+        d3: '../components/d3/d3.min',
         leaflet: '../components/leaflet/dist/leaflet',
-        crossfilter: '../components/crossfilter/crossfilter',
+        crossfilter: '../components/crossfilter/crossfilter.min',
         mustache: '../components/mustache/mustache',
         leafletmarkercluster: 'vendor/leaflet.markercluster',
         overlappingmarker: 'vendor/oms.min',

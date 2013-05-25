@@ -35,7 +35,7 @@ define(['d3'], function (d3) {
             .attr('transform', 'translate(' + pad.l + ',' + pad.t + ')');
 
         var brush = d3.svg.brush()
-            .x(x)
+            // .x(x)
             .on('brush', brushed);
 
         var gBrush = svg.append('g')
@@ -43,8 +43,6 @@ define(['d3'], function (d3) {
 
         var applyData = init.applyData = function (dates) {
             w = div.offsetWidth - pad.r - pad.l;
-            x.range([0, w]);
-            xAxis.scale(x);
             d3.select('#timeSeries').attr('width', w + pad.r + pad.l);
 
             var data = dates.group().all(),
@@ -53,6 +51,13 @@ define(['d3'], function (d3) {
             x.domain(d3.extent(data, function (d) { return d.key; }));
             y.domain([0, d3.max(data, function (d) { return d.value; })]);
             color.domain(y.domain())
+
+            var xCopy = x.copy();
+            xCopy.range([0, w + divider*1.5]);
+
+            x.range([0, w]);
+            xAxis.scale(x);
+            brush.x(xCopy);
 
             svg.append('g')
                 .attr('class', 'x axis')
@@ -64,7 +69,7 @@ define(['d3'], function (d3) {
                 .call(yAxis);
 
             d3.transition(svg).select(".x.axis")
-                .attr('width', w + pad.l + pad.r)
+                // .attr('width', w + pad.l + pad.r)
                 .attr("transform", "translate(0," + h + ")")
                 .call(xAxis);
 
@@ -93,7 +98,9 @@ define(['d3'], function (d3) {
             d3.selectAll('.brush')
                 .call(brush)
                 .selectAll('rect')
-                .attr('height', h);
+                .attr('height', h)
+                .selectAll('rect .background')
+                .attr('width', w + pad.r + pad.l);
 
             d3.selectAll('.x.axis line')
                 .attr('x1', divider)

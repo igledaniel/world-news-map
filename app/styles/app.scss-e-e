@@ -13,7 +13,7 @@ h1,h2,h3,h4,.locationList {
     // font-family: 'Gentium Basic', serif;
 }
 
-h1.title,h4.title {
+h1.title, h5.title {
     padding: 0px;
     margin-left: 8px;
 }

@@ -3,7 +3,7 @@ define(['d3', 'crossfilter', 'filterGeo', 'timeSeries'], function (d3, crossfilt
 
     var formatDate = d3.time.format('%Y%m%d');
 
-    d3.json('python/nyt_geo.json', function (error, json) {
+    d3.json('data/nyt_geo.json', function (error, json) {
 
         json['articles'].forEach(function (d) {
             d.date = formatDate.parse(d.date);

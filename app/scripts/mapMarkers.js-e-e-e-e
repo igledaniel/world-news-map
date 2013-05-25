@@ -13,7 +13,8 @@ define([
     'use strict';
 
     var init = function () {
-        var map = drawMap.init.map;
+        var map = drawMap.init.map,
+            dateFormat = d3.time.format('%A %B %e')
 
         var markers = init.markers = new L.MarkerClusterGroup({
             // disableClusteringAtZoom: 5,
@@ -49,7 +50,7 @@ define([
                     title: d.title,
                     url: d.url,
                     geo_facet: d.geoFacetString,
-                    date: d.date.toDateString(),
+                    date: dateFormat(d.date),
                     small_image: d.small_image_url
                 };
 
