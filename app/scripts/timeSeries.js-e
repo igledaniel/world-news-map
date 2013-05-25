@@ -55,7 +55,7 @@ define(['d3'], function (d3) {
             var xCopy = x.copy();
             xCopy.range([0, w + divider*1.5]);
 
-            x.range([0, w]);
+            x.range([divider/2, w]);
             xAxis.scale(x);
             brush.x(xCopy);
 

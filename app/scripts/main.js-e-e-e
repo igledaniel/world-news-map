@@ -31,7 +31,10 @@ require.config({
     }
 });
 
-require(['app', 'leaflet', 'font!google,families:[Roboto+Slab:400,700]'], function (app, L) {
+require(['app', 'd3', 'leaflet', 'font!google,families:[Roboto+Slab:400,700]'], function (app, d3, L) {
     'use strict';
+    d3.transition().duration(500).select('#loader')
+        .style('opacity', 1e-6)
+        .remove();
     app;
 });

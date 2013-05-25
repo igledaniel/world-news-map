@@ -12,6 +12,10 @@
         <link rel="stylesheet" href="styles/main.css">
     </head>
     <body>
+        <div id="loader">
+        <div class="hero-unit" style="position:relative; top:25%;"><h1>One map of global events, coming right up &rsaquo;&rsaquo;&rsaquo;</h1></div>
+        </div>
+
         <div class="container">
             <div class="lightbox" id="blackout"></div>
             <div class="surround" id="header">
@@ -20,10 +24,28 @@
             </div>
             <div class="lightbox" id="about">
                 <h4 id="aboutClose">x</h4>
-                <h4>World News Map <small>by Nikhil Sonnad</small></h4>
-                <p>Sed sem mauris, accumsan quis congue in, lacinia sed erat. Etiam ante elit, cursus in dapibus non, feugiat et elit. Pellentesque lacus justo, aliquam sit amet pharetra id, lacinia eu arcu. Pellentesque urna nibh, aliquet sit amet tristique ut, tristique ut lacus. Sed in interdum risus. In in tincidunt lectus. Sed viverra pellentesque fringilla. Mauris accumsan lectus nec nisl laoreet bibendum. Ut eu metus id nibh ornare posuere in sit amet metus. Quisque vitae augue felis, at iaculis risus. Ut at justo et dolor varius cursus vel vel arcu. Praesent vestibulum leo in orci lacinia tempus. Maecenas elementum, ante ac rutrum dignissim, dui sapien convallis ligula, nec molestie purus urna placerat nisl. Curabitur tempor venenatis mauris ut vulputate. Aenean nisl nunc, hendrerit et fringilla non, porttitor eu nibh. Aenean non justo eu est ornare fermentum.</p>
+                <h4>World News Map <small>by <a href="http://theoldbeggar.com">Nikhil Sonnad</a></small></h4>
+                <p>What you see here is the geographical spread of recent world news, as reported by the New York Times.</p>
 
-                <p>Suspendisse laoreet orci quis lacus vestibulum ultrices. Vestibulum nisi velit, viverra ut semper quis, mollis vel nunc. Maecenas vitae gravida ipsum. Donec augue nulla, commodo et rutrum ut, facilisis eget quam. Pellentesque nulla dui, bibendum eget lacinia sed, mattis egestas metus. Pellentesque sit amet pretium ante. Maecenas dolor dui, interdum eu euismod quis, fringilla venenatis dolor.</p>
+                <h5>Some cool features</h5>
+
+                <ul>
+                <li>Drag your mouse/finger across the chart in the 'Time' section to see articles in a particular date range</li>
+                <li>Click on the name of a place in in 'Place' section to filter by that location</li>
+                <li>Drill down by clicking on the circular article clusters</li>
+                <li>Shift+click+drag to zoom in on a rectangular area of the map</li>
+                <li>Click on an individual map marker to get info on and a link to an article</li>
+                </ul>
+
+                <h5>What's underneath</h5>
+
+                <p>This thing works by periodically grabbing articles in the New York Times World section, using the <a href="http://developer.nytimes.com/docs/article_search_api">New York Times Article Search API</a> and finding geodata for article locations with <a href="http://wiki.openstreetmap.org/wiki/Nominatim">Open Street Map's Nominatim</a>. The 500 most recent articles are shown. A small number of articles may be missing: those for which no locations are provided, or for which no lat/lon pairs are found, are thrown out.</p>
+
+                <p>The map itself is produced by <a href="http://leafletjs.com/">Leaflet</a> and some of its great <a href="http://leafletjs.com/plugins.html">plugins</a>, with map tiles served by <a href="http://www.mapbox.com/">MapBox</a>. Lots of other functionality depends on <a href="http://d3js.org/">d3js</a>, and the filtering is powered by <a href="http://square.github.io/crossfilter/">crossfilter</a>.</p>
+
+                <p>Feel free to contact me with questions, comments or feedback via <a href="https://twitter.com/nsonnad">Twitter</a> or <a href="mailto:nikhil@theoldbeggar.com">email</a>.</p>
+
+                <p><small>Note that all the article content displayed here belongs to the New York Times.</small></p>
             </div>
 
             <div id="map"></div>

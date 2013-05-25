@@ -8,7 +8,7 @@ define(['d3', 'crossfilter', 'filterGeo', 'timeSeries'], function (d3, crossfilt
             d3.transition().duration(500).select('#about')
                 .style('opacity', 1.0);
             d3.transition().duration(500).select('#blackout')
-                .style('opacity', 0.5);
+                .style('opacity', 0.4);
         });
 
     d3.select('#aboutClose').on('click', function () {
