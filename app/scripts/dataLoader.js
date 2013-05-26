@@ -1,4 +1,4 @@
-define(['d3', 'crossfilter', 'filterGeo', 'timeSeries'], function (d3, crossfilter, filterGeo, timeSeries) {
+define(['d3', 'crossfilter', 'filterGeo'], function (d3, crossfilter, filterGeo) {
     'use strict';
 
     d3.select('small#aboutClick')

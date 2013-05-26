@@ -30,23 +30,6 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
         };
 
         var redrawDate = setData.redrawDate = function (brush) {
-
-            if (brush) {
-                if (brush.empty() === true) {
-                    dates.filterAll();
-                    redrawMap();
-                } else {
-                    dates.filterRange([
-                        d3.time.day.round(brush.extent()[0]),
-                        d3.time.day.ceil(brush.extent()[1])
-                        ]);
-                    redrawMap();
-                }
-            } else {
-                dates.filterAll();
-                redrawMap();
-            }
-
             function redrawMap() {
                 if (dates.top(Infinity).length > 0) {
                     markers.clearLayers();
@@ -61,7 +44,23 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
 
                     mapMarkers.init.applyData(dates.top(Infinity));
                     locationsList.init.applyData(d3.entries(entries));
-                };
+                }
+            }
+
+            if (brush) {
+                if (brush.empty() === true) {
+                    dates.filterAll();
+                    redrawMap();
+                } else {
+                    dates.filterRange([
+                        d3.time.day.round(brush.extent()[0]),
+                        d3.time.day.ceil(brush.extent()[1])
+                    ]);
+                    redrawMap();
+                }
+            } else {
+                dates.filterAll();
+                redrawMap();
             }
         };
 

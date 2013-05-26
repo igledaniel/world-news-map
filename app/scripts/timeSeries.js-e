@@ -28,7 +28,7 @@ define(['d3'], function (d3) {
             .orient('left');
 
         var svg = d3.select('#timeFixed').append('svg')
-            .attr("id", "timeSeries")
+            .attr('id', 'timeSeries')
             .attr('width', w + pad.r + pad.l)
             .attr('height', h + pad.t + pad.b)
         .append('g')
@@ -65,11 +65,11 @@ define(['d3'], function (d3) {
             svg.append('g')
                 .attr('class', 'y axis');
 
-            svg.transition().duration(300).select(".y.axis")
+            svg.transition().duration(300).select('.y.axis')
                 .call(yAxis);
 
-            d3.transition(svg).select(".x.axis")
-                .attr("transform", "translate(0," + h + ")")
+            d3.transition(svg).select('.x.axis')
+                .attr('transform', 'translate(0,' + h + ')')
                 .call(xAxis);
 
             var series = rects.selectAll('.rectGroup')
@@ -78,7 +78,7 @@ define(['d3'], function (d3) {
             var seriesEnter = series.enter().append('g')
                 .attr('class', 'rectGroup');
 
-            seriesEnter.append("rect")
+            seriesEnter.append('rect')
                 .attr({
                     class: 'histRect',
                     fill: function (d) { return color(d.value); }
@@ -100,11 +100,11 @@ define(['d3'], function (d3) {
                 .attr('height', h);
 
             d3.selectAll('.x.axis line')
-                .attr('x1', divider/2)
-                .attr('x2', divider/2);
+                .attr('x1', divider / 2)
+                .attr('x2', divider / 2);
 
             d3.selectAll('.x.axis text')
-                .attr('x', divider/2);
+                .attr('x', divider / 2);
         };
 
         function brushed() {
