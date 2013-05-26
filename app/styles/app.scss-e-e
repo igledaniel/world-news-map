@@ -218,3 +218,7 @@ h6 {
     fill-opacity: 0.4;
     shape-rendering: crispEdges;
 }
+
+.histRect {
+    shape-rendering: crispEdges;
+}

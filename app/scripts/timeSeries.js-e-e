@@ -46,18 +46,17 @@ define(['d3'], function (d3) {
             d3.select('#timeSeries').attr('width', w + pad.r + pad.l);
 
             var data = dates.group().all(),
-                divider = w / data.length / 2;
+                divider = w / data.length;
 
-            x.domain(d3.extent(data, function (d) { return d.key; }));
+            var dateExtent = d3.extent(data, function (d) { return d.key; }),
+                newMax = d3.time.day.offset(dateExtent[1], 1);
+
+            x.domain([dateExtent[0], newMax]);
             y.domain([0, d3.max(data, function (d) { return d.value; })]);
             color.domain(y.domain());
-
-            var xCopy = x.copy();
-            xCopy.range([0, w + divider * 1.5]);
-
-            x.range([divider / 2, w]);
+            x.range([0, w]);
             xAxis.scale(x);
-            brush.x(xCopy);
+            brush.x(x);
 
             svg.append('g')
                 .attr('class', 'x axis');
@@ -69,7 +68,6 @@ define(['d3'], function (d3) {
                 .call(yAxis);
 
             d3.transition(svg).select(".x.axis")
-                // .attr('width', w + pad.l + pad.r)
                 .attr("transform", "translate(0," + h + ")")
                 .call(xAxis);
 
@@ -87,9 +85,9 @@ define(['d3'], function (d3) {
 
             d3.selectAll('.histRect').transition().duration(300)
                 .attr({
-                    x: function (d) { return x(d.key) + divider / 2; },
+                    x: function (d) { return x(d.key); },
                     y: function (d) { return y(d.value); },
-                    width: divider - 2,
+                    width: divider - 1,
                     height: function (d) { return h - y(d.value); }
                 });
 
@@ -98,16 +96,14 @@ define(['d3'], function (d3) {
             d3.selectAll('.brush')
                 .call(brush)
                 .selectAll('rect')
-                .attr('height', h)
-                .selectAll('rect .background')
-                .attr('width', w + pad.r + pad.l);
+                .attr('height', h);
 
             d3.selectAll('.x.axis line')
-                .attr('x1', divider)
-                .attr('x2', divider);
+                .attr('x1', divider/2)
+                .attr('x2', divider/2);
 
             d3.selectAll('.x.axis text')
-                .attr('x', divider);
+                .attr('x', divider/2);
         };
 
         function brushed() {
