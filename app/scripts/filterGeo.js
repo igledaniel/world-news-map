@@ -30,26 +30,39 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
         };
 
         var redrawDate = setData.redrawDate = function (brush) {
-            markers.clearLayers();
 
             if (brush) {
-                if (brush.empty()) {
+                if (brush.empty() === true) {
                     dates.filterAll();
+                    redrawMap();
                 } else {
-                    dates.filterRange(brush.extent());
+                    dates.filterRange([
+                        d3.time.day.round(brush.extent()[0]),
+                        d3.time.day.ceil(brush.extent()[1])
+                        ]);
+                    redrawMap();
                 }
+            } else {
+                dates.filterAll();
+                redrawMap();
             }
 
-            var entries = {};
+            function redrawMap() {
+                if (dates.top(Infinity).length > 0) {
+                    markers.clearLayers();
 
-            dates.top(Infinity).forEach(function (d) {
-                d.geo_facet.forEach(function (c) {
-                    entries[c] = (entries[c] || 0) + 1;
-                });
-            });
+                    var entries = {};
 
-            mapMarkers.init.applyData(dates.top(Infinity));
-            locationsList.init.applyData(d3.entries(entries));
+                    dates.top(Infinity).forEach(function (d) {
+                        d.geo_facet.forEach(function (c) {
+                            entries[c] = (entries[c] || 0) + 1;
+                        });
+                    });
+
+                    mapMarkers.init.applyData(dates.top(Infinity));
+                    locationsList.init.applyData(d3.entries(entries));
+                };
+            }
         };
 
         function resetGeo() {

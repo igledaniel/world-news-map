@@ -35,11 +35,12 @@ define(['d3'], function (d3) {
             .attr('transform', 'translate(' + pad.l + ',' + pad.t + ')');
 
         var brush = d3.svg.brush()
-            // .x(x)
             .on('brush', brushed);
 
+        var rects = svg.append('g');
+
         svg.append('g')
-                .attr('class', 'brush');
+            .attr('class', 'brush');
 
         var applyData = init.applyData = function (dates) {
             w = div.offsetWidth - pad.r - pad.l;
@@ -71,7 +72,7 @@ define(['d3'], function (d3) {
                 .attr("transform", "translate(0," + h + ")")
                 .call(xAxis);
 
-            var series = svg.selectAll('.rectGroup')
+            var series = rects.selectAll('.rectGroup')
                 .data(data);
 
             var seriesEnter = series.enter().append('g')
