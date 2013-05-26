@@ -214,3 +214,6 @@ h6 {
 .histRect {
     shape-rendering: crispEdges;
 }
+
+div#social { width:100%; margin:20px 0px; }
+div.fb-like { margin-right:25px; vertical-align:top; zoom:1; *display:inline; }

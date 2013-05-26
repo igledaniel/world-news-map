@@ -25,6 +25,31 @@
             <div class="lightbox" id="about">
                 <h4 id="aboutClose">x</h4>
                 <h4>World News Map <small>by <a href="http://theoldbeggar.com">Nikhil Sonnad</a></small></h4>
+                <div id="social">
+                    <div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) return;
+                      js = d.createElement(s); js.id = id;
+                      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=499877830052869";
+                      fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+                    <div>
+                    <div class="fb-like" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="nsonnad">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    <div class="g-plusone" data-size="medium"></div>
+                    </div>
+                    <!-- Place this tag where you want the +1 button to render. -->
+                    <script type="text/javascript">
+                      (function() {
+                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                        po.src = 'https://apis.google.com/js/plusone.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                      })();
+                    </script>
+                </div>
                 <p>What you see here is the geographical spread of recent world news, as reported by the New York Times.</p>
 
                 <h5>Some cool features</h5>
