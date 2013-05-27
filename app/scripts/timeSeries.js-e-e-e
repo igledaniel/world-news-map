@@ -80,8 +80,7 @@ define(['d3'], function (d3) {
 
             seriesEnter.append('rect')
                 .attr({
-                    class: 'histRect',
-                    fill: function (d) { return color(d.value); }
+                    class: 'histRect'
                 });
 
             d3.selectAll('.histRect').transition().duration(300)
@@ -89,7 +88,8 @@ define(['d3'], function (d3) {
                     x: function (d) { return x(d.key); },
                     y: function (d) { return y(d.value); },
                     width: divider - 1,
-                    height: function (d) { return h - y(d.value); }
+                    height: function (d) { return h - y(d.value); },
+                    fill: function (d) { return color(d.value); }
                 });
 
             brush.extent(brush.extent());

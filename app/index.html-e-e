@@ -24,7 +24,7 @@
             </div>
             <div class="lightbox" id="about">
                 <h4 id="aboutClose">x</h4>
-                <h4>World News Map <small>by <a href="http://theoldbeggar.com">Nikhil Sonnad</a></small></h4>
+                <h4>World News Map <small>by <a target="_blank" href="https://twitter.com/nsonnad">Nikhil Sonnad</a></small></h4>
                 <div id="social">
                     <div id="fb-root"></div>
                     <script>(function(d, s, id) {
