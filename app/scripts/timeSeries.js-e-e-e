@@ -16,8 +16,8 @@ define(['d3'], function (d3) {
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .tickSubdivide(2)
-            .ticks(d3.time.days, 3)
+            .tickSubdivide(3)
+            .ticks(d3.time.days, 4)
             .tickFormat(d3.time.format('%m' + '/' + '%d'))
             .orient('bottom');
 
@@ -44,7 +44,7 @@ define(['d3'], function (d3) {
 
         var applyData = init.applyData = function (dates) {
             w = div.offsetWidth - pad.r - pad.l;
-            d3.select('#timeSeries').attr('width', w + pad.r + pad.l);
+            d3.select('#timeSeries').attr('width', w + pad.l);
 
             var data = dates.group().all(),
                 divider = w / data.length;
