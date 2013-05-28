@@ -5,7 +5,7 @@ define(['d3'], function (d3) {
 
         var pad = { t: 10, r: 40, b: 20, l: 30 },
             div = document.getElementById('timeFixed'),
-            h = 120 - pad.t - pad.b,
+            h = 110 - pad.t - pad.b,
             w = div.offsetWidth - pad.r - pad.l,
             filterGeo = require('filterGeo'),
             color = d3.scale.linear().range(['#8fc2e0', '#03213f']),
