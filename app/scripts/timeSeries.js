@@ -16,8 +16,8 @@ define(['d3'], function (d3) {
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .tickSubdivide(3)
-            .ticks(d3.time.days, 4)
+            .tickSubdivide(2)
+            .ticks(d3.time.days, 3)
             .tickFormat(d3.time.format('%m' + '/' + '%d'))
             .orient('bottom');
 
@@ -105,6 +105,8 @@ define(['d3'], function (d3) {
 
             d3.selectAll('.x.axis text')
                 .attr('x', divider / 2);
+
+            d3.selectAll('.x.axis .tick')[0].pop().remove()
         };
 
         function brushed() {
