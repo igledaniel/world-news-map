@@ -19,7 +19,7 @@ div#loader {
 
 div#map {
     width: 100%;
-    height: 64%;
+
 }
 
 div#about {
@@ -112,6 +112,26 @@ div#about {
     width: 80%;
 }
 
+}
+
+@media screen and (min-height: 501px) {
+    div#map {
+        height: 68%;
+    }
+
+    div#footerWrapper {
+        height: 26%
+    }
+}
+
+@media screen and (max-height: 500px) {
+    div#map {
+        height: 64%;
+    }
+
+    div#footerWrapper {
+        height: 30%
+    }
 }
 
 @media screen and (min-width: 760px) {
