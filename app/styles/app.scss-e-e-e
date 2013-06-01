@@ -4,7 +4,7 @@ body,html,.container {
 }
 
 .container {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 div#loader {
@@ -111,7 +111,6 @@ div#about {
     right: 10%;
     width: 80%;
 }
-
 }
 
 @media screen and (min-height: 501px) {
@@ -161,7 +160,7 @@ div#about {
 
 div.leaflet-popup-content {
     overflow: auto;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 div.leaflet-popup-content p {
@@ -227,7 +226,7 @@ h6 {
 }
 
 .axis text {
-    font: 10px sans-serif;
+    font-size: 10px;
     fill: #333333;
 }
 

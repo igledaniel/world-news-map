@@ -11,13 +11,13 @@ define(['d3'], function (d3) {
             color = d3.scale.linear().range(['#8fc2e0', '#03213f']),
             formatDate = d3.time.format('%a %b %d');
 
-        var x = d3.time.scale().range([0, w]),
+        var x = d3.time.scale().rangeRound([0, w]),
             y = d3.scale.linear().rangeRound([h, 0]).nice();
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .tickSubdivide(4)
-            .ticks(d3.time.days, 5)
+            .tickSubdivide(3)
+            .ticks(d3.time.days, 4)
             .tickFormat(d3.time.format('%m' + '/' + '%d'))
             .orient('bottom');
 
@@ -44,7 +44,7 @@ define(['d3'], function (d3) {
 
         var applyData = init.applyData = function (dates) {
             w = div.offsetWidth - pad.r - pad.l;
-            d3.select('#timeSeries').attr('width', w + pad.l);
+            d3.select('#timeSeries').attr('width', w + pad.l + pad.r);
 
             var data = dates.group().all(),
                 divider = w / data.length;
@@ -52,12 +52,16 @@ define(['d3'], function (d3) {
             var dateExtent = d3.extent(data, function (d) { return d.key; }),
                 newMax = d3.time.day.offset(dateExtent[1], 1);
 
-            x.domain([dateExtent[0], newMax]);
+            x.domain([dateExtent[0], dateExtent[1]]);
             y.domain([0, d3.max(data, function (d) { return d.value; })]);
             color.domain(y.domain());
-            x.range([0, w]);
+
+            x.rangeRound([0, w]);
             xAxis.scale(x);
-            brush.x(x);
+
+            var xCopy = x.copy();
+            xCopy.rangeRound([0, w + divider]).domain([dateExtent[0], newMax]);
+            brush.x(xCopy);
 
             svg.append('g')
                 .attr('class', 'x axis');
@@ -87,7 +91,7 @@ define(['d3'], function (d3) {
                 .attr({
                     x: function (d) { return x(d.key); },
                     y: function (d) { return y(d.value); },
-                    width: divider - 1,
+                    width: divider - 3,
                     height: function (d) { return h - y(d.value); },
                     fill: function (d) { return color(d.value); }
                 });
@@ -97,7 +101,8 @@ define(['d3'], function (d3) {
             d3.selectAll('.brush')
                 .call(brush)
                 .selectAll('rect')
-                .attr('height', h);
+                .attr('height', h)
+                .attr('w', w + pad.r + pad.l)
 
             d3.selectAll('.x.axis line')
                 .attr('x1', divider / 2)
