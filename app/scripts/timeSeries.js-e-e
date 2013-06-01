@@ -104,11 +104,11 @@ define(['d3'], function (d3) {
                 .attr('height', h)
                 .attr('w', w + pad.r + pad.l)
 
-            d3.selectAll('.x.axis line')
+            d3.selectAll('.x.axis line').transition()
                 .attr('x1', divider / 2)
                 .attr('x2', divider / 2);
 
-            d3.selectAll('.x.axis text')
+            d3.selectAll('.x.axis text').transition()
                 .attr('x', divider / 2);
         };
 
