@@ -60,7 +60,7 @@
 
                 <h5>What's underneath</h5>
 
-                <p>This thing works by periodically grabbing articles in the New York Times World section, using the <a href="http://developer.nytimes.com/docs/article_search_api">New York Times Article Search API</a> and finding geodata for article locations with <a href="http://wiki.openstreetmap.org/wiki/Nominatim">Open Street Map's Nominatim</a>. The 500 most recent articles are shown. A small number of articles may be missing: those for which no locations are provided, or for which no lat/lon pairs are found, are thrown out.</p>
+                <p>This thing works by periodically grabbing articles in the New York Times World section, using the <a href="http://developer.nytimes.com/docs/article_search_api">New York Times Article Search API</a> and finding geodata for article locations with <a href="http://wiki.openstreetmap.org/wiki/Nominatim">Open Street Map's Nominatim</a>. Only recent articles (up to 500) are shown. A small number of articles may be missing: those for which no locations are provided, or for which no lat/lon pairs are found, are thrown out.</p>
 
                 <p>The map itself is produced by <a href="http://leafletjs.com/">Leaflet</a> and some of its great <a href="http://leafletjs.com/plugins.html">plugins</a>, with map tiles served by <a href="http://www.mapbox.com/">MapBox</a>. Lots of other functionality depends on <a href="http://d3js.org/">d3js</a>, and the filtering is powered by <a href="http://square.github.io/crossfilter/">crossfilter</a>.</p>
 
