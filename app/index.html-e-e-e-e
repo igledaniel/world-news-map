@@ -24,7 +24,7 @@
             </div>
             <div class="lightbox" id="about">
                 <h4 id="aboutClose">x</h4>
-                <h4>World News Map <small>by <a target="_blank" href="https://twitter.com/nsonnad">Nikhil Sonnad</a></small></h4>
+                <h3>World News Map <small>by <a target="_blank" href="https://twitter.com/nsonnad">Nikhil Sonnad</a></small></h3>
                 <div id="social">
                     <div id="fb-root"></div>
                     <script>(function(d, s, id) {
@@ -48,9 +48,7 @@
                       })();
                     </script>
                 </div>
-                <p>What you see here is the geographical spread of recent world news, as reported by the New York Times.</p>
-
-                <h5>Some cool features</h5>
+                <h4>The geographical spread of recent world news, as reported by the New York Times.</h4>
 
                 <ul>
                 <li>Drag your mouse/finger across the chart in the 'Time' section to see articles in a particular date range</li>
