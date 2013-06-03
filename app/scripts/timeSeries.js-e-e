@@ -17,6 +17,7 @@ define(['d3'], function (d3) {
         var xAxis = d3.svg.axis()
             .scale(x)
             .tickSubdivide(3)
+            .tickSize(6, 4, 0)
             .ticks(d3.time.days, 4)
             .tickFormat(d3.time.format('%m' + '/' + '%d'))
             .orient('bottom');
@@ -105,11 +106,11 @@ define(['d3'], function (d3) {
                 .attr('w', w + pad.r + pad.l)
 
             d3.selectAll('.x.axis line').transition()
-                .attr('x1', divider / 2)
-                .attr('x2', divider / 2);
+                .attr('x1', divider / 2 - 1)
+                .attr('x2', divider / 2 - 1);
 
             d3.selectAll('.x.axis text').transition()
-                .attr('x', divider / 2);
+                .attr('x', divider / 2 - 1);
         };
 
         function brushed() {
