@@ -1,6 +1,7 @@
 import requests, json, urllib, time
 from collections import defaultdict
 from pprint import pprint
+from datetime import datetime, timedelta
 
 output_master = {}
 
@@ -11,50 +12,63 @@ def get_news_data():
     article_api = ''
 
     # get 10 latest NYT World articles
-    world_articles1 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=0&api-key=' + article_api
-    world_articles2 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=1&api-key=' + article_api
-    world_articles3 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=2&api-key=' + article_api
-    world_articles4 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=3&api-key=' + article_api
-    world_articles5 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=4&api-key=' + article_api
-    world_articles6 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=5&api-key=' + article_api
-    world_articles7 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=6&api-key=' + article_api
-    world_articles8 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=7&api-key=' + article_api
-    world_articles9 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=8&api-key=' + article_api
-    world_articles10 = 'http://api.nytimes.com/svc/search/v1/article?begin_date=20130415&end_date=20130509&query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=9&api-key=' + article_api
+    world_articles1 = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name:(%22World%22)%20AND%20source:(%22The%20New%20York%20Times%22)&fl=web_url,headline,keywords,byline,multimedia,pub_date&sort=newest&api-key=' + article_api
+    # world_articles1 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=0&api-key=' + article_api
+    # world_articles2 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=1&api-key=' + article_api
+    # world_articles3 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=2&api-key=' + article_api
+    # world_articles4 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=3&api-key=' + article_api
+    # world_articles5 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=4&api-key=' + article_api
+    # world_articles6 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=5&api-key=' + article_api
+    # world_articles7 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=6&api-key=' + article_api
+    # world_articles8 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=7&api-key=' + article_api
+    # world_articles9 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=8&api-key=' + article_api
+    # world_articles10 = 'http://api.nytimes.com/svc/search/v1/article?query=nytd_section_facet:[World]&fields=date,title,geo_facet,url,byline,small_image_url&offset=9&api-key=' + article_api
 
     # get results
     r1 = requests.get(world_articles1)
-    r2 = requests.get(world_articles2)
-    r3 = requests.get(world_articles3)
-    r4 = requests.get(world_articles4)
-    r5 = requests.get(world_articles5)
-    r6 = requests.get(world_articles6)
-    r7 = requests.get(world_articles7)
-    r8 = requests.get(world_articles8)
-    r9 = requests.get(world_articles9)
-    r10 = requests.get(world_articles10)
+    # r2 = requests.get(world_articles2)
+    # r3 = requests.get(world_articles3)
+    # r4 = requests.get(world_articles4)
+    # r5 = requests.get(world_articles5)
+    # r6 = requests.get(world_articles6)
+    # r7 = requests.get(world_articles7)
+    # r8 = requests.get(world_articles8)
+    # r9 = requests.get(world_articles9)
+    # r10 = requests.get(world_articles10)
 
     # jsonize results
-    output1 = r1.json()['results']
-    output2 = r2.json()['results']
-    output3 = r3.json()['results']
-    output4 = r4.json()['results']
-    output5 = r5.json()['results']
-    output6 = r6.json()['results']
-    output7 = r7.json()['results']
-    output8 = r8.json()['results']
-    output9 = r9.json()['results']
-    output10 = r10.json()['results']
+    output1 = r1.json()['response']['docs']
+    # output2 = r2.json()['results']
+    # output3 = r3.json()['results']
+    # output4 = r4.json()['results']
+    # output5 = r5.json()['results']
+    # output6 = r6.json()['results']
+    # output7 = r7.json()['results']
+    # output8 = r8.json()['results']
+    # output9 = r9.json()['results']
+    # output10 = r10.json()['results']
 
-    output = output1 + output2 + output3 + output4 + output5 + output6 + output7 + output8 + output9 + output10
-    # output = output1
-
+    # output = output1 + output2 + output3 + output4 + output5 + output6 + output7 + output8 + output9 + output10
+    output = output1
     return output
 
 
 def remove_no_geo(articles):
     geo = [a for a in articles if 'geo_facet' in a.keys()]
-    return geo
+    not_old = []
+    today = datetime.today().date()
+    before = timedelta(days=90)
+
+    for a in geo:
+        date = datetime.strptime(a['date'], "%Y%m%d").date()
+
+        if today - date < before:
+            not_old.append(a)
+
+    # print not_old
+    # return not_old
+
+    return not_old
 
 
 def remove_no_lat_lon(articles):
@@ -89,15 +103,15 @@ def get_geodata(articles, article, i):
             assign_coordinates(article, geocode_json)
         elif i < 3:
             i += 1
-            print 'no data, trying location #' + str(i + 1)
+            # print 'no data, trying location #' + str(i + 1)
             get_geodata(articles, article, i)
         else:
             # give up after third try
-            print 'no luck, removing this article'
+            # print 'no luck, removing this article'
             articles.remove(article)
     else:
         # give up if nothing in the list matches Nominatim
-        print 'no luck, removing this article'
+        # print 'no luck, removing this article'
         articles.remove(article)
 
 
