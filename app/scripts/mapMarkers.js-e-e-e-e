@@ -47,11 +47,11 @@ define([
                 var d = dataset[i];
 
                 var templateData = {
-                    title: d.title,
+                    title: d.headline,
                     url: d.url,
                     geo_facet: d.geoFacetString,
                     date: dateFormat(d.date),
-                    small_image: d.small_image_url
+                    thumbnail: d.thumbnail
                 };
 
                 var markerHtmlImage = Mustache.to_html(tooltip_image, templateData),
@@ -59,7 +59,7 @@ define([
 
                 var marker = new L.Marker([d.lat, d.lon]);
 
-                if (d['small_image_url'] !== undefined) {
+                if (d.thumbnail !== null) {
                     marker.bindPopup(markerHtmlImage);
                 } else {
                     marker.bindPopup(markerHtmlText);

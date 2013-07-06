@@ -3,7 +3,7 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
 
     var setData = function (cross) {
 
-        var geo = cross.dimension(function (d) { return d.geo_facet; }),
+        var geo = cross.dimension(function (d) { return d.locales; }),
             dates = cross.dimension(function (d) { return d.date; }),
             mapMarkers = require('mapMarkers'),
             markers = mapMarkers.init.markers;
@@ -19,7 +19,7 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
             var entries = {};
 
             geo.top(Infinity).forEach(function (d) {
-                d.geo_facet.forEach(function (c) {
+                d.locales.forEach(function (c) {
                     entries[c] = (entries[c] || 0) + 1;
                 });
             });
@@ -37,7 +37,7 @@ define(['d3', 'crossfilter', 'locationsList', 'mapMarkers', 'timeSeries'], funct
                     var entries = {};
 
                     dates.top(Infinity).forEach(function (d) {
-                        d.geo_facet.forEach(function (c) {
+                        d.locales.forEach(function (c) {
                             entries[c] = (entries[c] || 0) + 1;
                         });
                     });

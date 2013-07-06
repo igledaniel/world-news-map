@@ -20,16 +20,17 @@ define(['d3', 'crossfilter', 'filterGeo'], function (d3, crossfilter, filterGeo)
             .style('display', 'none');
     });
 
-    var formatDate = d3.time.format('%Y%m%d');
+    var formatDate = d3.time.format('%Y-%m-%d');
 
-    d3.json('data/nyt_geo.json', function (error, json) {
+    d3.json('python/nyt_geo_temp.json', function (error, json) {
 
-        json.articles.forEach(function (d) {
+        json.forEach(function (d) {
             d.date = formatDate.parse(d.date);
-            d.geoFacetString = d.geo_facet.join(' | ');
+            d.geoFacetString = d.locales.join(' | ');
         });
 
-        var cross = crossfilter(json.articles);
+        console.log(json)
+        var cross = crossfilter(json);
 
         filterGeo.setData(cross);
     });

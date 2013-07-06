@@ -3,4 +3,4 @@
     <h6>{{geo_facet}}</h6>
     <p class="date">{{date}}</p>
 </div>
- <a href="{{url}}"><img src="{{small_image}}" class="img-circle" /></a>
+ <a href="{{url}}"><img src="http://nytimes.com/{{thumbnail}}" class="img-circle" /></a>
