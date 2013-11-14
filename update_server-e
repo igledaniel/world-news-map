@@ -1,4 +1,4 @@
 #!/bin/bash
-rm -rf dist/
 grunt build
-cd dist/ && scp -r * theoldbe@theoldbeggar.com:/home/theoldbe/www/worldnewsmap/
+cd dist/
+rsync -rv . nikhil@theoldbeggar.com:/var/www/worldnewsmap
