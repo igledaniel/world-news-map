@@ -22,8 +22,7 @@ define(['d3', 'crossfilter', 'filterGeo'], function (d3, crossfilter, filterGeo)
 
     var formatDate = d3.time.format('%Y-%m-%d');
 
-    d3.json('python/nyt_geo_temp.json', function (error, json) {
-
+    d3.json('../data/nyt_geo.json', function (error, json) {
         json.forEach(function (d) {
             d.date = formatDate.parse(d.date);
             d.geoFacetString = d.locales.join(' | ');

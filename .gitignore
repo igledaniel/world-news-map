@@ -4,3 +4,4 @@ dist/
 .tmp/
 .sass-cache/
 component.json
+app/data/ENV/
