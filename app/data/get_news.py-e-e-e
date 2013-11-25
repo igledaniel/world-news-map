@@ -1,3 +1,4 @@
+#!/var/www/worldnewsmap/data/ENV/bin/python
 import requests, json, urllib, time
 from collections import defaultdict
 from pprint import pprint
@@ -156,7 +157,6 @@ def add_new_items():
     # find the new articles
     ids = [a['_id'] for a in fetch_old]
     new_articles = [a for a in filter_no_geo if a['_id'] not in ids]
-    new_articles = [a for a in filter_no_geo]
 
     # get geodata for new articles
     loop_geodata(new_articles)
