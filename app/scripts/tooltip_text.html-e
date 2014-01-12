@@ -1,3 +1,0 @@
-<h4><a target="_blank" class="tooltipLink" href="{{url}}">{{title}}</a></h4>
-<h6>{{geo_facet}}</h6>
-<p class="date">{{date}}</p>
