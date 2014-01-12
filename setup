@@ -3,3 +3,5 @@ npm install && bower install
 echo '{
   "nyt_article_api_key": ""
 }' > config.json
+cd app/data && pip install -r requirements.txt
+cd ../../
