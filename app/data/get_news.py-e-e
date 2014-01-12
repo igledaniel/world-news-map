@@ -83,7 +83,6 @@ def get_geodata(articles, article, i):
 
     if i < len(article['locales']) and i < 3:
         place = article['locales'][i]
-        # print place
         payload = {
             'q':place,
             'accept-language': 'en',
@@ -96,17 +95,17 @@ def get_geodata(articles, article, i):
         # loop through location list in case initial value(s) not
         # identifiable by Nominatim
         if geocode_json:
-            # print 'Adding: ' + article['headline']['main']
-            # print 'NYT Locale: ' + article['locales'][i]
-            # print 'Place: ' + geocode_json[0]['display_name']
+            print 'Adding: ' + article['headline']['main']
+            print 'NYT Locale: ' + article['locales'][i]
+            print 'Place: ' + geocode_json[0]['display_name']
             assign_coordinates(article, geocode_json)
         else:
-            # print 'no geodata for ' + article['locales'][i] + ', trying location #' + str(i + 1)
+            print 'no geodata for ' + article['locales'][i] + ', trying location #' + str(i + 1)
             i += 1
             get_geodata(articles, article, i)
     else:
         # give up if nothing in the list matches Nominatim
-        # print 'no geo matches, removing this article'
+        print 'no geo matches, removing this article'
         articles.remove(article)
 
 
@@ -138,7 +137,7 @@ def loop_geodata(articles):
         else:
             article['thumbnail'] = None
 
-        # print 'checking........... ' + article['headline']['main']
+        print 'checking........... ' + article['headline']['main']
         get_geodata(articles, article, 0)
 
     return articles
@@ -160,7 +159,7 @@ def add_new_items():
 
     # get geodata for new articles
     loop_geodata(new_articles)
-
+    
     # make sure nothing slipped through
     finalize = remove_no_lat_lon(temp_list)
 
@@ -178,7 +177,7 @@ def write_to_file(articles):
 def main():
     articles = add_new_items()
     # pprint(articles)
-    # print 'writing to file...'
+    print 'writing to file...'
     write_to_file(articles)
 
 

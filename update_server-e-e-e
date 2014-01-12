@@ -1,4 +1,0 @@
-#!/bin/bash
-grunt build
-cd dist/
-rsync -rv . nikhil@theoldbeggar.com:/var/www/worldnewsmap

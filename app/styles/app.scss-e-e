@@ -19,7 +19,6 @@ div#loader {
 
 div#map {
     width: 100%;
-
 }
 
 div#about {
